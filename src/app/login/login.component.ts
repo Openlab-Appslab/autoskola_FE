@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
           'token',
           this.sessionId
         );
-        this.router.navigate(['']);
+        this.router.navigate(['/home']);
       } else {
           alert("Authentication failed.")
       }
