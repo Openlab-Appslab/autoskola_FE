@@ -19,7 +19,14 @@ export class RegistrationComponent implements OnInit {
 
   onSubmit() {
     if (this.user.authority == 'USER') {
-      this.authService.registerUser(this.user).subscribe(
+      this.authService.registerStudent(this.user).subscribe(
+        (data) => {
+          console.log(data);
+        }
+      );
+    }
+    else if (this.user.authority == 'ADMIN') {
+      this.authService.registerAdmin(this.user).subscribe(
         (data) => {
           console.log(data);
         }

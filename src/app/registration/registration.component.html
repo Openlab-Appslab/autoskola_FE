@@ -23,10 +23,17 @@
     <mat-select id="role" name="role" required [(ngModel)]="user.authority" #role="ngModel">
       <mat-option value="USER">User</mat-option>
       <mat-option value="INSTRUCTOR">Instructor</mat-option>
+      <mat-option value="ADMIN">Admin</mat-option>
     </mat-select>
     <div [hidden]="role.valid || role.pristine" class="alert alert-danger">
       Role is required
     </div>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill" *ngIf="user.authority === 'ADMIN'">
+      <mat-label for="adminPassword">Admin password</mat-label>
+      <input matInput type="password" id="adminPassword" name="adminPassword" placeholder="Enter admin password" required
+        [(ngModel)]="user.confirmPassword" #adminPassword="ngModel">
     </mat-form-field>
     <br>
   <button type="submit" class="btn btn-primary" [disabled]="!registrationForm.form.valid">Submit</button>

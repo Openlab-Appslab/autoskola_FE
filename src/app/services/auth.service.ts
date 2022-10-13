@@ -10,14 +10,19 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   private instructorRegisterUrl = 'http://localhost:8080/api/instructorRegister';
-  private userRegisterUrl = 'http://localhost:8080/api/userRegister';
+  private studentRegisterUrl = 'http://localhost:8080/api/studentRegister';
+  private adminRegisterUrl = 'http://localhost:8080/api/adminRegister';
 
   registerInstructor(user: User) {
     return this.http.post<User>(this.instructorRegisterUrl, user);
   }
 
-  registerUser(user: User) {
-    return this.http.post<User>(this.userRegisterUrl, user);
+  registerStudent(user: User) {
+    return this.http.post<User>(this.studentRegisterUrl, user);
+  }
+
+  registerAdmin(user: User) {
+    return this.http.post<User>(this.adminRegisterUrl, user);
   }
 
 }
