@@ -1,32 +1,37 @@
-<form (ngSubmit)="onSubmit()" #registrationForm="ngForm">
-  <div class="form-group">
-    <label for="username">Username</label>
-    <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required
-      [(ngModel)]="user.username" #username="ngModel">
+<div class="h-100 d-flex align-items-center justify-content-center">
+  <form (ngSubmit)="onSubmit()" #registrationForm="ngForm">
+    <mat-form-field appearance="fill">
+      <mat-label for="username">Username</mat-label>
+      <input matInput type="text" id="username" name="username" placeholder="Enter username" required
+        [(ngModel)]="user.username" #username="ngModel">
+    </mat-form-field>
     <div [hidden]="username.valid || username.pristine" class="alert alert-danger">
       Username is required
     </div>
-  </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required
-      [(ngModel)]="user.password" #password="ngModel">
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label for="password">Password</mat-label>
+      <input matInput type="password" id="password" name="password" placeholder="Enter password" required
+        [(ngModel)]="user.password" #password="ngModel">
+    </mat-form-field>
     <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
       Password is required
     </div>
-  </div>
-  <div class="form-group">
-    <label for="role">Role</label>
-    <select class="form-control" id="role" name="role" required [(ngModel)]="user.authority" #role="ngModel">
-      <option value="USER">User</option>
-      <option value="INSTRUCTOR">Instructor</option>
-    </select>
+    <br>
+    <mat-form-field appearance="fill">
+    <mat-label for="role">Role</mat-label>
+    <mat-select id="role" name="role" required [(ngModel)]="user.authority" #role="ngModel">
+      <mat-option value="USER">User</mat-option>
+      <mat-option value="INSTRUCTOR">Instructor</mat-option>
+    </mat-select>
     <div [hidden]="role.valid || role.pristine" class="alert alert-danger">
       Role is required
     </div>
-  </div>
+    </mat-form-field>
+    <br>
   <button type="submit" class="btn btn-primary" [disabled]="!registrationForm.form.valid">Submit</button>
   <div>
     <a [routerLink]="['/login']">If you already have an account, login here</a>
   </div>
 </form>
+</div>

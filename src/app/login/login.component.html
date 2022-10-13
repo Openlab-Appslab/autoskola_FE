@@ -1,16 +1,19 @@
-<form name="form" (ngSubmit)="login()" #f="ngForm">
-    <div>
-        <label for="username">Username</label>
-        <input type="text" name="username" [(ngModel)]="model.username" #username="ngModel" required />
-    </div>
-    <div>
-        <label for="password">Password</label>
-        <input type="password" name="password" [(ngModel)]="model.password" #password="ngModel" required />
-    </div>
-    <div>
-        <button>Login</button>
-    </div>
-    <div>
-        <a [routerLink]="['/registration']">If you don't have an account, register here</a>
-    </div>
-</form>
+<div class="h-100 d-flex align-items-center justify-content-center">
+    <form name="form" (ngSubmit)="login()" #loginForm="ngForm">
+        <mat-form-field appearance="fill">
+            <mat-label>Username</mat-label>
+            <input type="text" name="username" [(ngModel)]="model.username" #username="ngModel" required  matInput>
+          </mat-form-field>
+          <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input type="password" name="password" [(ngModel)]="model.password" #password="ngModel" required matInput/>
+        </mat-form-field>
+        <div>
+            <button [disabled]="!loginForm.form.valid" class="btn btn-primary">Login</button>
+        </div>
+        <div>
+            <a [routerLink]="['/registration']">If you don't have an account, register here</a>
+        </div>
+    </form>
+</div>

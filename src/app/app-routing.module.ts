@@ -4,12 +4,13 @@ import { AuthenticationGuard } from './authentication.guard';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { HomeComponent } from './home/home.component';
+import { DisableLoginGuard } from './disable-login.guard';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent, canActivate: [AuthenticationGuard]},
-    { path: 'registration', component: RegistrationComponent},
-    { path: 'login', component: LoginComponent},
+    { path: 'registration', component: RegistrationComponent, canActivate: [DisableLoginGuard]},
+    { path: 'login', component: LoginComponent, canActivate: [DisableLoginGuard]},
     { path: '**', redirectTo: 'login', pathMatch: 'full' }
 ];
 
