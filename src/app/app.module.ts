@@ -19,7 +19,7 @@ import {MatSelectModule} from '@angular/material/select';
     AppComponent,
     HomeComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,7 +30,7 @@ import {MatSelectModule} from '@angular/material/select';
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }],
   bootstrap: [AppComponent]
