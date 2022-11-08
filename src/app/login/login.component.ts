@@ -1,4 +1,5 @@
-import { HttpClient } from '@angular/common/http';
+import { User } from './../user';
+import { AuthService } from '../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -9,35 +10,19 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  model: any = {};
-  sessionId: any = "";
+  user: User;
 
-  constructor(
-      private router: Router,
-      private http: HttpClient
-  ) { }
+  constructor(public router: Router, private authService: AuthService) {
+    this.user = new User();
+  }
 
   ngOnInit(): void {
   }
 
   login() {
-    let url = 'http://localhost:8080/api/login';
-    this.http.post<any>(url, {
-      username: this.model.username,
-      password: this.model.password
-    }).subscribe(res => {
-      if (res) {
-        this.sessionId = res.sessionId;
-          
-        sessionStorage.setItem(
-          'token',
-          this.sessionId
-        );
-        this.router.navigate(['/home']);
-      } else {
-          alert("Authentication failed.")
-      }
+    this.authService.login(this.user).subscribe((response: any) => {
+      sessionStorage.setItem('token', response.sessionId);
+      this.router.navigate(['/home']);
     });
-}
-
+    }
 }

@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../user';
@@ -12,6 +13,7 @@ export class AuthService {
   private instructorRegisterUrl = 'http://localhost:8080/api/instructorRegister';
   private studentRegisterUrl = 'http://localhost:8080/api/studentRegister';
   private adminRegisterUrl = 'http://localhost:8080/api/adminRegister';
+  private loginUrl = 'http://localhost:8080/api/login';
 
   registerInstructor(user: User) {
     return this.http.post<User>(this.instructorRegisterUrl, user);
@@ -25,4 +27,7 @@ export class AuthService {
     return this.http.post<User>(this.adminRegisterUrl, user);
   }
 
+  login(user: User){
+    return this.http.post(this.loginUrl, {username: user.username, password: user.password});
+  }
 }
