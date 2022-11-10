@@ -227,4 +227,11 @@
   .example-full-width {
     width: 100%;
   }
-  
+.form-control{
+  margin-bottom: 5%;
+}
+img{
+  max-height: fit-content;
+  max-width: 100%;
+  margin-bottom: 5%;
+}

@@ -49,6 +49,15 @@
                   <mat-label>Describe your organization</mat-label>
                   <textarea matInput [(ngModel)]="organization.description_organization" [ngModelOptions]="{standalone: true}"></textarea>
                 </mat-form-field>
+                <div class="form-group">
+                  <span class="padding-bottom--15">Upload your logo</span>
+                  <input 
+                      id="file" 
+                      type="file" 
+                      class="form-control"
+                      (change)="onFileChange($event)">
+                  <img [src]="this.logo" />
+              </div>
                 <div class="fieldButton padding-bottom--24">
                   <button (click)="sendORG()" type="submit" name="submit" value="Continue">Continue</button>
                 </div>
