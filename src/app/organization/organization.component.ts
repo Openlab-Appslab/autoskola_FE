@@ -17,7 +17,7 @@ export class OrganizationComponent implements OnInit {
     this.logoFormData = new FormData();
   }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
   }
 
   sendORG() {

@@ -49,6 +49,10 @@
                   <mat-label>Describe your organization</mat-label>
                   <textarea matInput [(ngModel)]="organization.description_organization" [ngModelOptions]="{standalone: true}"></textarea>
                 </mat-form-field>
+                <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>Price</mat-label>
+                  <input matInput type="number" [(ngModel)]="organization.price_organization" [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
                 <div class="form-group">
                   <span class="padding-bottom--15">Upload your logo</span>
                   <input 

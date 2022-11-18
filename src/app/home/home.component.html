@@ -1,1 +1,33 @@
-<p>home working</p>
+<ng-container *ngIf="!waitingRoom && organizations">
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4" *ngFor="let organization of organizations">
+            <div class="card p-3">
+                <div class="d-flex flex-row mb-3">
+                    <div class="d-flex flex-column ml-2"><span>{{organization.name_organization}}</span></div>
+                </div>
+                <h6>{{organization.description_organization}}</h6>
+                <div class="d-flex justify-content-between install mt-3"><span>Price {{organization.price_organization}}€</span>
+                    <button (click)="addToWaitingRoom(this.organization)" type="button" class="btn btn-primary">Apply</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</ng-container>
+
+<!-- if user is in waiting room show all waiting room info -->
+<ng-container *ngIf="waitingRoom">
+<section id="welcome-section">
+    <h1>Hello, {{waitingRoom[0].userEntity.username}}</h1>
+<p>You are in waiting room for driving school <span class="underline">{{waitingRoom[0].autoskolaOrganization.name_organization}}</span></p>
+<p>The price for this driving school is <span class="underline">{{waitingRoom[0].autoskolaOrganization.price_organization}}€</span></p>
+<span class="desc"><span class="underline">Description of driving school:</span> {{waitingRoom[0].autoskolaOrganization.description_organization}}</span>
+<a href="#cancel"><div class="button">Cancel</div></a>
+</section>
+</ng-container>
+
+<!--  if there is no waiting room and no organization show this that there is no organization -->
+<div *ngIf="!waitingRoom && !organizations">
+    <p class="nothing">There is no organization</p>
+</div>

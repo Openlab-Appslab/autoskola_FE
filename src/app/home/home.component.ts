@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Organization } from '../organization';
+import { OrganizationService } from '../services/organization.service';
 
 @Component({
   selector: 'app-home',
@@ -8,19 +9,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  organizations: Organization[];
+  waitingRoom: any;
+  constructor(private organizationService: OrganizationService) { }
 
   ngOnInit(): void {
-    this.http.get<any>('http://localhost:8080/api/list').subscribe(res => {
-      if (res) {
-        console.log('List ', res);
-      } else {
-          alert("Failed to query list.")
+    this.organizationService.allORG().subscribe(data => {
+      if (data.length > 0) {
+        this.organizations = data;
       }
     });
+    this.organizationService.getWaitingRoom().subscribe(
+      (data: any) => {
+        if (data.length > 0) {
+          this.waitingRoom = data;
+        }
+      }
+    );
   }
   logout() {
     sessionStorage.removeItem('token');
     window.location.href = '/login';
   }
+
+  addToWaitingRoom(organization: Organization) {
+    this.organizationService.saveToWaitingRoom(organization).subscribe(data => {
+      window.location.reload();
+    });
+  }
+
+  cancelWaitingRoom(){}
 }
