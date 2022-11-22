@@ -3,4 +3,5 @@ export class Organization {
     name_organization?: string;
     description_organization?: string;
     price_organization?: number;
+    image?: any;
 }
