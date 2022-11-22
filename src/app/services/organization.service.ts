@@ -15,6 +15,7 @@ export class OrganizationService {
   private alORGUrl = 'http://localhost:8080/api/allOrganization';
   private getWaitingRoomUrl = 'http://localhost:8080/returnAllWaitingRoom';
   private getImageUrl = 'http://localhost:8080/get/image/info/';
+  private removeFromWaitingRoomUrl = 'http://localhost:8080/removeFromWaitingRoom';
 
   saveORG(organization: Organization) {
     return this.http.post<Organization>(this.saveORGUrl, organization);
@@ -38,5 +39,9 @@ export class OrganizationService {
 
   getImage(id: number) {
     return this.http.get(this.getImageUrl + id);
+  }
+
+  cancelWaitingRoom(id: number) {
+    return this.http.post(this.removeFromWaitingRoomUrl, {"id_waiting": id});
   }
 }

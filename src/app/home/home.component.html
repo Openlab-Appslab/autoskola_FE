@@ -23,7 +23,7 @@
 <p>You are in waiting room for driving school <span class="underline">{{waitingRoom[0].autoskolaOrganization.name_organization}}</span></p>
 <p>The price for this driving school is <span class="underline">{{waitingRoom[0].autoskolaOrganization.price_organization}}€</span></p>
 <span class="desc"><span class="underline">Description of driving school:</span> {{waitingRoom[0].autoskolaOrganization.description_organization}}</span>
-<a href="#cancel"><div class="button">Cancel</div></a>
+<a><button (click)="cancelWaitingRoom(this.waitingRoom[0].id_waiting)" class="button">Cancel</button></a>
 </section>
 </ng-container>
 

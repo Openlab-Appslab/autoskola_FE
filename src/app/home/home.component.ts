@@ -43,5 +43,9 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  cancelWaitingRoom(){}
+  cancelWaitingRoom(id: number) {
+    this.organizationService.cancelWaitingRoom(id).subscribe(() => {
+      window.location.reload();
+    });
+  }
 }
