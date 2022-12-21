@@ -1,4 +1,4 @@
-  <div class="login-root">
+  <div class="login-root" *ngIf="this.user.authority != 'ADMIN'">
     <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
       <div class="loginbackground box-background--white padding-top--64">
         <div class="loginbackground-gridContainer">
@@ -62,8 +62,8 @@
                       (change)="onFileChange($event)">
                   <img [src]="this.logo" />
               </div>
-                <div class="fieldButton padding-bottom--24">
-                  <button (click)="sendORG()" type="submit" name="submit" value="Continue">Continue</button>
+                <div class="text-center">
+                  <button (click)="sendORG()" class="btn btn-primary">Create</button>
                 </div>
               </form>
             </div>
@@ -72,3 +72,61 @@
       </div>
     </div>
   </div>
+
+<!-- make a list of all users in waiting list by bootstrap table -->
+<div *ngIf="this.user.authority === 'ADMIN'">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="text-center">Waiting list</h2>
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Authority</th>
+              <th>ID</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let users of waitingRoom">
+              <td>{{users.username}}</td>
+              <td>{{users.authority}}</td>
+              <td>{{users.id}}</td>
+              <td class="text-center actions">
+                <button (click)="acceptUser(users.id)" class="btn btn-success">Accept</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="text-center">Students in ORG</h2>
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Authority</th>
+              <th>ID</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let users of usersInOrganization">
+              <td>{{users.username}}</td>
+              <td>{{users.authority}}</td>
+              <td>{{users.id}}</td>
+              <td class="text-center actions">
+                <!-- <button (click)="deleteUser(users.user?.id)" class="btn btn-danger">Delete</button> -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</div>

@@ -202,3 +202,6 @@ img{
     height: 100px;
     object-fit: cover;
 }
+.name{
+    margin-left: calc(50% - 75px);
+}

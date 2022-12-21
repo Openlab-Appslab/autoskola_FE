@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService.login(this.user).subscribe((response: any) => {
       sessionStorage.setItem('token', response.sessionId);
-      this.router.navigate(['/home']);
+      window.location.href = '/home';
     });
     }
 }

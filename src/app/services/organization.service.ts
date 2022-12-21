@@ -16,6 +16,10 @@ export class OrganizationService {
   private getWaitingRoomUrl = 'http://localhost:8080/returnAllWaitingRoom';
   private getImageUrl = 'http://localhost:8080/get/image/info/';
   private removeFromWaitingRoomUrl = 'http://localhost:8080/removeFromWaitingRoom';
+  private getAllStudentsInWaitingRoomUrl = 'http://localhost:8080/returnAllStudentsInWaitingRoom';
+  private getAllStudentsInOrganizationUrl = 'http://localhost:8080/returnAllStudentsInOrganization';
+  private addStudentsToOrganizationUrl = 'http://localhost:8080/addMembersToOrganization';
+  private getCurrentOrganizationIdUrl = 'http://localhost:8080/returnCurrentOrganization';
 
   saveORG(organization: Organization) {
     return this.http.post<Organization>(this.saveORGUrl, organization);
@@ -43,5 +47,21 @@ export class OrganizationService {
 
   cancelWaitingRoom(id: number) {
     return this.http.post(this.removeFromWaitingRoomUrl, {"id_waiting": id});
+  }
+
+  getAllStudentsInWaitingRoom() {
+    return this.http.get(this.getAllStudentsInWaitingRoomUrl);
+  }
+
+  getAllStudentsInOrganization() {
+    return this.http.get(this.getAllStudentsInOrganizationUrl);
+  }
+
+  addStudentsToOrganization(userId: number, organizationId: number) {
+    return this.http.post(this.addStudentsToOrganizationUrl, {"autoskolaOrganization": {"id_organization": organizationId}, "userEntity": {"id": userId}});
+  }
+
+  getCurrentOrganizationId() {
+    return this.http.get(this.getCurrentOrganizationIdUrl);
   }
 }

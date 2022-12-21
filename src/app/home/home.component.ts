@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
            this.organizationService.getImage(this.organizations[i].image.id).subscribe((data: any) => {
              this.organizations[i].image = 'data:image/jpeg;base64,' + data.image;
            });
-         }
+        }
       }
     });
     this.organizationService.getWaitingRoom().subscribe(
