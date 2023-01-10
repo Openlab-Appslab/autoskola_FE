@@ -9,17 +9,17 @@ export class OrganizationService {
 
   constructor(private http: HttpClient) { }
 
-  private saveORGUrl = 'https://autoskolabe-production.up.railway.app/api/api/createOrganization';
-  private postImageUrl = 'https://autoskolabe-production.up.railway.app/api/upload/image';
-  private saveToWaitingRoomUrl = 'https://autoskolabe-production.up.railway.app/api/saveToWaitingRoom';
-  private alORGUrl = 'https://autoskolabe-production.up.railway.app/api/api/allOrganization';
-  private getWaitingRoomUrl = 'https://autoskolabe-production.up.railway.app/api/returnAllWaitingRoom';
-  private getImageUrl = 'https://autoskolabe-production.up.railway.app/api/get/image/info/';
-  private removeFromWaitingRoomUrl = 'https://autoskolabe-production.up.railway.app/api/removeFromWaitingRoom';
-  private getAllStudentsInWaitingRoomUrl = 'https://autoskolabe-production.up.railway.app/api/returnAllStudentsInWaitingRoom';
-  private getAllStudentsInOrganizationUrl = 'https://autoskolabe-production.up.railway.app/api/returnAllStudentsInOrganization';
-  private addStudentsToOrganizationUrl = 'https://autoskolabe-production.up.railway.app/api/addMembersToOrganization';
-  private getCurrentOrganizationIdUrl = 'https://autoskolabe-production.up.railway.app/api/returnCurrentOrganization';
+  private saveORGUrl = 'https://autoskolabe-production.up.railway.app/api/createOrganization';
+  private postImageUrl = 'https://autoskolabe-production.up.railway.app/upload/image';
+  private saveToWaitingRoomUrl = 'https://autoskolabe-production.up.railway.app/saveToWaitingRoom';
+  private alORGUrl = 'https://autoskolabe-production.up.railway.app/api/allOrganization';
+  private getWaitingRoomUrl = 'https://autoskolabe-production.up.railway.app/returnAllWaitingRoom';
+  private getImageUrl = 'https://autoskolabe-production.up.railway.app/get/image/info/';
+  private removeFromWaitingRoomUrl = 'https://autoskolabe-production.up.railway.app/removeFromWaitingRoom';
+  private getAllStudentsInWaitingRoomUrl = 'https://autoskolabe-production.up.railway.app/returnAllStudentsInWaitingRoom';
+  private getAllStudentsInOrganizationUrl = 'https://autoskolabe-production.up.railway.app/returnAllStudentsInOrganization';
+  private addStudentsToOrganizationUrl = 'https://autoskolabe-production.up.railway.app/addMembersToOrganization';
+  private getCurrentOrganizationIdUrl = 'https://autoskolabe-production.up.railway.app/returnCurrentOrganization';
 
   saveORG(organization: Organization) {
     return this.http.post<Organization>(this.saveORGUrl, organization);
