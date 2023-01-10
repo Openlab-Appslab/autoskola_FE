@@ -9,11 +9,11 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  private instructorRegisterUrl = 'http://localhost:8080/api/instructorRegister';
-  private studentRegisterUrl = 'http://localhost:8080/api/studentRegister';
-  private adminRegisterUrl = 'http://localhost:8080/api/adminRegister';
-  private loginUrl = 'http://localhost:8080/api/login';
-  private getAuthorityUrl = 'http://localhost:8080/api/returnAuthority';
+  private instructorRegisterUrl = 'https://autoskolabe-production.up.railway.app/api/api/instructorRegister';
+  private studentRegisterUrl = 'https://autoskolabe-production.up.railway.app/api/api/studentRegister';
+  private adminRegisterUrl = 'https://autoskolabe-production.up.railway.app/api/api/adminRegister';
+  private loginUrl = 'https://autoskolabe-production.up.railway.app/api/api/login';
+  private getAuthorityUrl = 'https://autoskolabe-production.up.railway.app/api/api/returnAuthority';
 
   registerInstructor(user: User) {
     return this.http.post<User>(this.instructorRegisterUrl, user);
