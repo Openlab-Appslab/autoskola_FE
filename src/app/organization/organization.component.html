@@ -1,132 +1,132 @@
-  <div class="login-root" *ngIf="this.user.authority != 'ADMIN'">
-    <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
-      <div class="loginbackground box-background--white padding-top--64">
-        <div class="loginbackground-gridContainer">
-          <div class="box-root flex-flex" style="grid-area: top / start / 8 / end;">
-            <div class="box-root" style="background-image: linear-gradient(white 0%, rgb(247, 250, 252) 33%); flex-grow: 1;">
-            </div>
+<div class="login-root" *ngIf="this.organizationId === null">
+  <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
+    <div class="loginbackground box-background--white padding-top--64">
+      <div class="loginbackground-gridContainer">
+        <div class="box-root flex-flex" style="grid-area: top / start / 8 / end;">
+          <div class="box-root" style="background-image: linear-gradient(white 0%, rgb(247, 250, 252) 33%); flex-grow: 1;">
           </div>
-          <div class="box-root flex-flex" style="grid-area: 4 / 2 / auto / 5;">
-            <div class="box-root box-divider--light-all-2 animationLeftRight tans3s" style="flex-grow: 1;"></div>
-          </div>
-          <div class="box-root flex-flex" style="grid-area: 6 / start / auto / 2;">
-            <div class="box-root box-background--blue800" style="flex-grow: 1;"></div>
-          </div>
-          <div class="box-root flex-flex" style="grid-area: 7 / start / auto / 4;">
-            <div class="box-root box-background--blue animationLeftRight" style="flex-grow: 1;"></div>
-          </div>
-          <div class="box-root flex-flex" style="grid-area: 8 / 4 / auto / 6;">
-            <div class="box-root box-background--gray100 animationLeftRight tans3s" style="flex-grow: 1;"></div>
-          </div>
-          <div class="box-root flex-flex" style="grid-area: 2 / 15 / auto / end;">
-            <div class="box-root box-background--cyan200 animationRightLeft tans4s" style="flex-grow: 1;"></div>
-          </div>
-          <div class="box-root flex-flex" style="grid-area: 3 / 14 / auto / end;">
-            <div class="box-root box-background--blue animationRightLeft" style="flex-grow: 1;"></div>
-          </div>
-          <div class="box-root flex-flex" style="grid-area: 4 / 17 / auto / 20;">
-            <div class="box-root box-background--gray100 animationRightLeft tans4s" style="flex-grow: 1;"></div>
-          </div>
-          <div class="box-root flex-flex" style="grid-area: 5 / 14 / auto / 17;">
-            <div class="box-root box-divider--light-all-2 animationRightLeft tans3s" style="flex-grow: 1;"></div>
-          </div>
+        </div>
+        <div class="box-root flex-flex" style="grid-area: 4 / 2 / auto / 5;">
+          <div class="box-root box-divider--light-all-2 animationLeftRight tans3s" style="flex-grow: 1;"></div>
+        </div>
+        <div class="box-root flex-flex" style="grid-area: 6 / start / auto / 2;">
+          <div class="box-root box-background--blue800" style="flex-grow: 1;"></div>
+        </div>
+        <div class="box-root flex-flex" style="grid-area: 7 / start / auto / 4;">
+          <div class="box-root box-background--blue animationLeftRight" style="flex-grow: 1;"></div>
+        </div>
+        <div class="box-root flex-flex" style="grid-area: 8 / 4 / auto / 6;">
+          <div class="box-root box-background--gray100 animationLeftRight tans3s" style="flex-grow: 1;"></div>
+        </div>
+        <div class="box-root flex-flex" style="grid-area: 2 / 15 / auto / end;">
+          <div class="box-root box-background--cyan200 animationRightLeft tans4s" style="flex-grow: 1;"></div>
+        </div>
+        <div class="box-root flex-flex" style="grid-area: 3 / 14 / auto / end;">
+          <div class="box-root box-background--blue animationRightLeft" style="flex-grow: 1;"></div>
+        </div>
+        <div class="box-root flex-flex" style="grid-area: 4 / 17 / auto / 20;">
+          <div class="box-root box-background--gray100 animationRightLeft tans4s" style="flex-grow: 1;"></div>
+        </div>
+        <div class="box-root flex-flex" style="grid-area: 5 / 14 / auto / 17;">
+          <div class="box-root box-divider--light-all-2 animationRightLeft tans3s" style="flex-grow: 1;"></div>
         </div>
       </div>
-      <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
-        <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
-          <h1><a rel="dofollow">Organization</a></h1>
-        </div>
-        <div class="formbg-outer">
-          <div class="formbg">
-            <div class="formbg-inner padding-horizontal--48">
-              <span class="padding-bottom--15">Make your own organization</span>
-              <form id="stripe-login">
-                <mat-form-field class="example-full-width" appearance="fill">
-                  <mat-label>Name</mat-label>
-                  <input matInput [(ngModel)]="organization.name_organization" [ngModelOptions]="{standalone: true}">
-                </mat-form-field>
-                <mat-form-field class="example-full-width" appearance="fill">
-                  <mat-label>Describe your organization</mat-label>
-                  <textarea matInput [(ngModel)]="organization.description_organization" [ngModelOptions]="{standalone: true}"></textarea>
-                </mat-form-field>
-                <mat-form-field class="example-full-width" appearance="fill">
-                  <mat-label>Price</mat-label>
-                  <input matInput type="number" [(ngModel)]="organization.price_organization" [ngModelOptions]="{standalone: true}">
-                </mat-form-field>
-                <div class="form-group">
-                  <span class="padding-bottom--15">Upload your logo</span>
-                  <input 
-                      id="file" 
-                      type="file" 
-                      class="form-control"
-                      (change)="onFileChange($event)">
-                  <img [src]="this.logo" />
-              </div>
-                <div class="text-center">
-                  <button (click)="sendORG()" class="btn btn-primary">Create</button>
-                </div>
-              </form>
+    </div>
+    <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
+      <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
+        <h1><a rel="dofollow">Organization</a></h1>
+      </div>
+      <div class="formbg-outer">
+        <div class="formbg">
+          <div class="formbg-inner padding-horizontal--48">
+            <span class="padding-bottom--15">Make your own organization</span>
+            <form id="stripe-login">
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Name</mat-label>
+                <input matInput [(ngModel)]="organization.name_organization" [ngModelOptions]="{standalone: true}">
+              </mat-form-field>
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Describe your organization</mat-label>
+                <textarea matInput [(ngModel)]="organization.description_organization" [ngModelOptions]="{standalone: true}"></textarea>
+              </mat-form-field>
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Price</mat-label>
+                <input matInput type="number" [(ngModel)]="organization.price_organization" [ngModelOptions]="{standalone: true}">
+              </mat-form-field>
+              <div class="form-group">
+                <span class="padding-bottom--15">Upload your logo</span>
+                <input 
+                    id="file" 
+                    type="file" 
+                    class="form-control"
+                    (change)="onFileChange($event)">
+                <img [src]="this.logo" />
             </div>
+              <div class="text-center">
+                <button (click)="sendORG()" class="btn btn-primary">Create</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 
 <!-- make a list of all users in waiting list by bootstrap table -->
-<div *ngIf="this.user.authority === 'ADMIN'">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <h2 class="text-center">Waiting list</h2>
-        <table class="table table-striped table-bordered">
-          <thead>
-            <tr>
-              <th>Username</th>
-              <th>Authority</th>
-              <th>ID</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let users of waitingRoom">
-              <td>{{users.username}}</td>
-              <td>{{users.authority}}</td>
-              <td>{{users.id}}</td>
-              <td class="text-center actions">
-                <button (click)="acceptUser(users.id)" class="btn btn-success">Accept</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+<div *ngIf="this.organizationId !== null">
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-center">Waiting list</h2>
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Authority</th>
+            <th>ID</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let users of waitingRoom">
+            <td>{{users.username}}</td>
+            <td>{{users.authority}}</td>
+            <td>{{users.id}}</td>
+            <td class="text-center actions">
+              <button (click)="acceptUser(users.id)" class="btn btn-success">Accept</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
+</div>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <h2 class="text-center">Students in ORG</h2>
-        <table class="table table-striped table-bordered">
-          <thead>
-            <tr>
-              <th>Username</th>
-              <th>Authority</th>
-              <th>ID</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let users of usersInOrganization">
-              <td>{{users.username}}</td>
-              <td>{{users.authority}}</td>
-              <td>{{users.id}}</td>
-              <td class="text-center actions">
-                <!-- <button (click)="deleteUser(users.user?.id)" class="btn btn-danger">Delete</button> -->
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-center">Students in ORG</h2>
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Authority</th>
+            <th>ID</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let users of usersInOrganization">
+            <td>{{users.username}}</td>
+            <td>{{users.authority}}</td>
+            <td>{{users.id}}</td>
+            <td class="text-center actions">
+              <!-- <button (click)="deleteUser(users.user?.id)" class="btn btn-danger">Delete</button> -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
 </div>

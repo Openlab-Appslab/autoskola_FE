@@ -8,15 +8,17 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent implements OnInit {
   title = 'autoskola_FE';
-  authority: any;
+  authority: String;
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
+    if (!window.location.href.includes('login') && this.authority === undefined) {
     this.authService.getAuthority().subscribe(
       (data: any) => {
         this.authority = data.authority;
       }
     );
+    }
   }
 
 

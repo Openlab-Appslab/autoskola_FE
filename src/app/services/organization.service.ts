@@ -1,3 +1,5 @@
+import { waitingRoom } from './../waitingRoom';
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Organization } from '../organization';
@@ -9,17 +11,17 @@ export class OrganizationService {
 
   constructor(private http: HttpClient) { }
 
-  private saveORGUrl = 'https://autoskolabe-production.up.railway.app/api/createOrganization';
-  private postImageUrl = 'https://autoskolabe-production.up.railway.app/upload/image';
-  private saveToWaitingRoomUrl = 'https://autoskolabe-production.up.railway.app/saveToWaitingRoom';
-  private alORGUrl = 'https://autoskolabe-production.up.railway.app/api/allOrganization';
-  private getWaitingRoomUrl = 'https://autoskolabe-production.up.railway.app/returnAllWaitingRoom';
-  private getImageUrl = 'https://autoskolabe-production.up.railway.app/get/image/info/';
-  private removeFromWaitingRoomUrl = 'https://autoskolabe-production.up.railway.app/removeFromWaitingRoom';
-  private getAllStudentsInWaitingRoomUrl = 'https://autoskolabe-production.up.railway.app/returnAllStudentsInWaitingRoom';
-  private getAllStudentsInOrganizationUrl = 'https://autoskolabe-production.up.railway.app/returnAllStudentsInOrganization';
-  private addStudentsToOrganizationUrl = 'https://autoskolabe-production.up.railway.app/addMembersToOrganization';
-  private getCurrentOrganizationIdUrl = 'https://autoskolabe-production.up.railway.app/returnCurrentOrganization';
+  private saveORGUrl = 'http://localhost:8080/api/createOrganization';
+  private postImageUrl = 'http://localhost:8080/upload/image';
+  private saveToWaitingRoomUrl = 'http://localhost:8080/saveToWaitingRoom';
+  private alORGUrl = 'http://localhost:8080/api/allOrganization';
+  private getWaitingRoomUrl = 'http://localhost:8080/returnAllWaitingRoom';
+  private getImageUrl = 'http://localhost:8080/get/image/info/';
+  private removeFromWaitingRoomUrl = 'http://localhost:8080/removeFromWaitingRoom';
+  private getAllStudentsInWaitingRoomUrl = 'http://localhost:8080/returnAllStudentsInWaitingRoom';
+  private getAllStudentsInOrganizationUrl = 'http://localhost:8080/returnAllStudentsInOrganization';
+  private addStudentsToOrganizationUrl = 'http://localhost:8080/addMembersToOrganization';
+  private getCurrentOrganizationIdUrl = 'http://localhost:8080/returnCurrentOrganization';
 
   saveORG(organization: Organization) {
     return this.http.post<Organization>(this.saveORGUrl, organization);
@@ -49,19 +51,19 @@ export class OrganizationService {
     return this.http.post(this.removeFromWaitingRoomUrl, {"id_waiting": id});
   }
 
-  getAllStudentsInWaitingRoom() {
-    return this.http.get(this.getAllStudentsInWaitingRoomUrl);
+  getAllStudentsInWaitingRoom(): Observable<waitingRoom[]> {
+    return this.http.get<waitingRoom[]>(this.getAllStudentsInWaitingRoomUrl);
   }
 
-  getAllStudentsInOrganization() {
-    return this.http.get(this.getAllStudentsInOrganizationUrl);
+  getAllStudentsInOrganization(): Observable<any[]> {
+    return this.http.get<any[]>(this.getAllStudentsInOrganizationUrl);
   }
 
   addStudentsToOrganization(userId: number, organizationId: number) {
     return this.http.post(this.addStudentsToOrganizationUrl, {"autoskolaOrganization": {"id_organization": organizationId}, "userEntity": {"id": userId}});
   }
 
-  getCurrentOrganizationId() {
-    return this.http.get(this.getCurrentOrganizationIdUrl);
+  getCurrentOrganizationId(): Observable<any> {
+    return this.http.get<any>(this.getCurrentOrganizationIdUrl);
   }
 }

@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../user';
@@ -9,11 +10,11 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  private instructorRegisterUrl = 'https://autoskolabe-production.up.railway.app/api/instructorRegister';
-  private studentRegisterUrl = 'https://autoskolabe-production.up.railway.app/api/studentRegister';
-  private adminRegisterUrl = 'https://autoskolabe-production.up.railway.app/api/adminRegister';
-  private loginUrl = 'https://autoskolabe-production.up.railway.app/api/login';
-  private getAuthorityUrl = 'https://autoskolabe-production.up.railway.app/api/returnAuthority';
+  private instructorRegisterUrl = 'http://localhost:8080/api/instructorRegister';
+  private studentRegisterUrl = 'http://localhost:8080/api/studentRegister';
+  private adminRegisterUrl = 'http://localhost:8080/api/adminRegister';
+  private loginUrl = 'http://localhost:8080/api/login';
+  private getAuthorityUrl = 'http://localhost:8080/api/returnAuthority';
 
   registerInstructor(user: User) {
     return this.http.post<User>(this.instructorRegisterUrl, user);
@@ -31,7 +32,7 @@ export class AuthService {
     return this.http.post(this.loginUrl, {username: user.username, password: user.password});
   }
 
-  getAuthority(){
-    return this.http.get(this.getAuthorityUrl);
+  getAuthority(): Observable<String>{
+    return this.http.get<String>(this.getAuthorityUrl);
   }
 }

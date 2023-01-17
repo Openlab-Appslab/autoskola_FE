@@ -2,6 +2,7 @@ import { User } from './../user';
 import { AuthService } from '../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,12 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService.login(this.user).subscribe((response: any) => {
       sessionStorage.setItem('token', response.sessionId);
-      window.location.href = '/home';
+      this.authService.getAuthority().subscribe(
+        (data: any) => {
+          AppComponent.prototype.authority = data.authority;
+        }
+      );
+      this.router.navigate(['/home']);
     });
     }
 }

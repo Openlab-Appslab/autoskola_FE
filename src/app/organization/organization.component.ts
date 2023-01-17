@@ -1,8 +1,10 @@
+import { waitingRoom } from './../waitingRoom';
 import { Component, OnInit } from '@angular/core';
 import { OrganizationService } from '../services/organization.service';
 import { Organization } from '../organization';
 import { User } from '../user';
 import { AuthService } from '../services/auth.service';
+import { exhaustMap, forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-organization',
@@ -13,53 +15,48 @@ export class OrganizationComponent implements OnInit {
 
   organization: Organization;
   logoFormData: FormData;
-  logo: any;
+  logo: String;
   user: User = {} as User;
-  waitingRoom: any[] = [];
+  waitingRoom: waitingRoom[] = [];
   usersInOrganization: any[] = [];
-  organizationId: any;
+  organizationId: number;
   constructor(private organizationService: OrganizationService, private authService: AuthService) {
     this.organization = new Organization();
     this.logoFormData = new FormData();
   }
 
   ngOnInit(): void {
-    this.authService.getAuthority().subscribe(
-      (data: any) => {
-        this.user.authority = data.authority;
-      }
-    );
-    this.organizationService.getAllStudentsInWaitingRoom().subscribe(
-      (data: any) => {
-        this.waitingRoom = data;
-      }
-    );
-    this.organizationService.getAllStudentsInOrganization().subscribe(
-      (data: any) => {
-        this.usersInOrganization = data;
-        for (let i = 0; i < this.usersInOrganization.length; i++) {
-          for (let j = 0; j < this.waitingRoom.length; j++) {
-            if (this.usersInOrganization[i].id === this.waitingRoom[j].id) {
-              this.waitingRoom.splice(j, 1);
+      forkJoin([
+        this.organizationService.getCurrentOrganizationId(),
+        this.authService.getAuthority(),
+        this.organizationService.getAllStudentsInWaitingRoom(),
+        this.organizationService.getAllStudentsInOrganization()
+      ]).subscribe(
+        ([organi, authority, waitingRoom, users]) => {
+          this.organizationId = organi.id_organization;
+          this.user.authority = authority;
+          this.waitingRoom = waitingRoom;
+          this.usersInOrganization = users;
+          for (let i = 0; i < this.usersInOrganization.length; i++) {
+            for (let j = 0; j < this.waitingRoom.length; j++) {
+              if (this.usersInOrganization[i].id === this.waitingRoom[j].id) {
+                this.waitingRoom.splice(j, 1);
+              }
             }
           }
         }
-      }
-    );
-    this.organizationService.getCurrentOrganizationId().subscribe(
-      (data: any) => {
-        this.organizationId = data;
-      }
-    );
+      );
   }
-
     
   sendORG() {
-    this.organizationService.postImage(this.logoFormData).subscribe(
-      () => {
-        this.organizationService.saveORG(this.organization).subscribe();
-      }
-    );
+    this.organizationService.postImage(this.logoFormData).pipe(
+      exhaustMap(() => this.organizationService.saveORG(this.organization))
+    ).subscribe();
+    // this.organizationService.postImage(this.logoFormData).subscribe(
+    //   () => {
+    //     this.organizationService.saveORG(this.organization).subscribe();
+    //   }
+    // );
   }
 
   onFileChange(event: any) {
@@ -72,7 +69,7 @@ export class OrganizationComponent implements OnInit {
   }
 
   acceptUser(id: number) {
-    this.organizationService.addStudentsToOrganization(id, this.organizationId.id_organization).subscribe(
+    this.organizationService.addStudentsToOrganization(id, this.organizationId).subscribe(
       () => {
         // remove from waiting room
         for (let i = 0; i < this.waitingRoom.length; i++) {
