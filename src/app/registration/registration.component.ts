@@ -31,7 +31,7 @@ export class RegistrationComponent implements OnInit {
     };
     this.messageTrue = true;
     this.reSTR = "Potvrď prihlásenie cez Email";
-    this.http.post('http://localhost:8080/register', this.user).subscribe(
+    this.http.post('https://autoskolabe-production.up.railway.app/register', this.user).subscribe(
       (data: any) => {
         if (data.status === 'error')
         alert(data.message);
