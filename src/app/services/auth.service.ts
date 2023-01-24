@@ -15,6 +15,7 @@ export class AuthService {
   private adminRegisterUrl = 'http://localhost:8080/api/adminRegister';
   private loginUrl = 'http://localhost:8080/api/login';
   private getAuthorityUrl = 'http://localhost:8080/api/returnAuthority';
+  private sendConfirmationTokenUrl = 'http://localhost:8080/confirm-account';
 
   registerInstructor(user: User) {
     return this.http.post<User>(this.instructorRegisterUrl, user);
@@ -34,5 +35,9 @@ export class AuthService {
 
   getAuthority(): Observable<String>{
     return this.http.get<String>(this.getAuthorityUrl);
+  }
+
+  sendConfirmationToken(token: String){
+    return this.http.post(this.sendConfirmationTokenUrl + '?token=' + token, null);
   }
 }

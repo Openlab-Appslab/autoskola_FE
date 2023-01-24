@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
 import { AuthService } from '../services/auth.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-registration',
@@ -10,7 +11,11 @@ import { AuthService } from '../services/auth.service';
 export class RegistrationComponent implements OnInit {
 
   user: User;
-  constructor(private authService: AuthService) {
+  checkBadRegister: boolean = false;
+  message: Object;
+  messageTrue: boolean = false;
+  reSTR: any;
+  constructor(private authService: AuthService, private http: HttpClient) {
     this.user = new User();
   }
 
@@ -18,27 +23,21 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.user.authority == 'STUDENT') {
-      this.authService.registerStudent(this.user).subscribe(
-        (data) => {
-          console.log(data);
-        }
-      );
-    }
-    else if (this.user.authority == 'ADMIN') {
-      this.authService.registerAdmin(this.user).subscribe(
-        (data) => {
-          console.log(data);
-        }
-      );
-    }
-    else {
-      this.authService.registerInstructor(this.user).subscribe(
-        (data) => {
-          console.log(data);
-        }
-      );
-    }
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      })
+    };
+    this.messageTrue = true;
+    this.reSTR = "Potvrď prihlásenie cez Email";
+    this.http.post('http://localhost:8080/register', this.user).subscribe(
+      (data: any) => {
+        if (data.status === 'error')
+        alert(data.message);
+        else
+        alert(data.message);
+      },
+    );
   }
-
 }

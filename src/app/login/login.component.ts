@@ -12,12 +12,19 @@ import { AppComponent } from '../app.component';
 export class LoginComponent implements OnInit {
 
   user: User;
-
+  token: String;
   constructor(public router: Router, private authService: AuthService) {
     this.user = new User();
+    // find token in URL and save it to token variable
+    this.token = this.router.parseUrl(this.router.url).queryParams['token'];
   }
 
   ngOnInit(): void {
+    this.authService.sendConfirmationToken(this.token).subscribe(
+      (data: any) => {
+        console.log(data);
+      }
+    );
   }
 
   login() {
