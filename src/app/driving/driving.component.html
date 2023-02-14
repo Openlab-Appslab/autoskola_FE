@@ -1,0 +1,16 @@
+<p class="title">Choose a date of driving lesson</p>
+<mat-card class="demo-inline-calendar-card">
+    <mat-calendar [(selected)]="selectedDate" (click)="freeTimesFilter()" [minDate]="minDate" [maxDate]="maxDate"></mat-calendar>
+  </mat-card>
+<!-- <p>Selected date: {{selectedDate}}</p> -->
+
+<div *ngIf="this.selectedDate != null" class="times">
+  <div *ngIf="this.freeTimes" class="time-container">
+    <p (click)="selectTime('7.00')" *ngIf="this.freeTimes.clock7 == true" class="time">7:00</p>
+    <p (click)="selectTime('9.00')" *ngIf="this.freeTimes.clock9 == true" class="time">9:00</p>
+    <p (click)="selectTime('12.00')" *ngIf="this.freeTimes.clock12 == true" class="time">12:00</p>
+    <p (click)="selectTime('15.00')" *ngIf="this.freeTimes.clock15 == true" class="time">15:00</p>
+    <p (click)="selectTime('17.00')" *ngIf="this.freeTimes.clock17 == true" class="time">17:00</p>
+  </div>
+  <!-- <p class="no-times" *ngIf="freeTimes.length == 0">No free times</p> -->
+</div>

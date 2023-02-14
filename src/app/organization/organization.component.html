@@ -112,7 +112,8 @@
           <tr>
             <th>Username</th>
             <th>Authority</th>
-            <th>ID</th>
+            <th>countOfTheory</th>
+            <th>countOfDriving</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -120,9 +121,11 @@
           <tr *ngFor="let users of usersInOrganization">
             <td>{{users.username}}</td>
             <td>{{users.authority}}</td>
-            <td>{{users.id}}</td>
+            <td>{{users.countOfTheory}}</td>
+            <td>{{users.countOfDriving}}</td>
             <td class="text-center actions">
-              <!-- <button (click)="deleteUser(users.user?.id)" class="btn btn-danger">Delete</button> -->
+              <button (click)="minusTheory(users.username)" class="btn btn-danger">Theory</button>
+              <button (click)="minusPractise(users.username)" class="btn btn-danger">Practice</button>
             </td>
           </tr>
         </tbody>

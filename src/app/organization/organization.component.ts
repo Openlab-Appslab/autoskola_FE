@@ -19,7 +19,7 @@ export class OrganizationComponent implements OnInit {
   user: User = {} as User;
   waitingRoom: waitingRoom[] = [];
   usersInOrganization: any[] = [];
-  organizationId: number;
+  organizationId: any;
   constructor(private organizationService: OrganizationService, private authService: AuthService) {
     this.organization = new Organization();
     this.logoFormData = new FormData();
@@ -33,10 +33,17 @@ export class OrganizationComponent implements OnInit {
         this.organizationService.getAllStudentsInOrganization()
       ]).subscribe(
         ([organi, authority, waitingRoom, users]) => {
-          this.organizationId = organi.id_organization;
+          if (organi === null){
+            this.organizationId = null;
+          }
+          else
+          {
+            this.organizationId = organi.id_organization;
+          }
           this.user.authority = authority;
           this.waitingRoom = waitingRoom;
           this.usersInOrganization = users;
+          if (this.usersInOrganization !== null){
           for (let i = 0; i < this.usersInOrganization.length; i++) {
             for (let j = 0; j < this.waitingRoom.length; j++) {
               if (this.usersInOrganization[i].id === this.waitingRoom[j].id) {
@@ -44,6 +51,7 @@ export class OrganizationComponent implements OnInit {
               }
             }
           }
+        }
         }
       );
   }
@@ -81,4 +89,28 @@ export class OrganizationComponent implements OnInit {
       }
     );
   }
+
+
+    minusTheory(username: string) {
+      this.organizationService.degreaseTheoryHours(username).subscribe( (data: any) => {
+        console.log(data);
+        for (let i = 0; i < this.usersInOrganization.length; i++) {
+          if (this.usersInOrganization[i].username === username) {
+            this.usersInOrganization[i].countOfTheory -= 2;
+          }
+        }
+    });
+    }
+
+    minusPractise(username: string) {
+      this.organizationService.degreasePracticeHours(username).subscribe( (data: any) => {
+        console.log(data);
+        for (let i = 0; i < this.usersInOrganization.length; i++) {
+          if (this.usersInOrganization[i].username === username) {
+            this.usersInOrganization[i].countOfDriving -= 1;
+          }
+        }
+    });
+    }
+    
 }

@@ -14,6 +14,11 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { OrganizationComponent } from './organization/organization.component';
+import { DrivingComponent } from './driving/driving.component';
+import {MatDatepickerModule} from '@angular/material/datepicker'; 
+import { MatCardModule } from '@angular/material/card';
+import {MatNativeDateModule} from '@angular/material/core';
+
 
 @NgModule({
   declarations: [
@@ -22,6 +27,7 @@ import { OrganizationComponent } from './organization/organization.component';
     LoginComponent,
     RegistrationComponent,
     OrganizationComponent,
+    DrivingComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +39,9 @@ import { OrganizationComponent } from './organization/organization.component';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatDatepickerModule,
+    MatCardModule,
+    MatNativeDateModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }],
   bootstrap: [AppComponent]

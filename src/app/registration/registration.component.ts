@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
 import { AuthService } from '../services/auth.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-registration',
@@ -23,12 +23,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmit() {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      })
-    };
+    if (this.user.authority === 'ADMIN') {
     this.messageTrue = true;
     this.reSTR = "Potvrď prihlásenie cez Email";
     this.http.post('http://localhost:8080/register', this.user).subscribe(
@@ -40,4 +35,32 @@ export class RegistrationComponent implements OnInit {
       },
     );
   }
+  else if (this.user.authority === 'INSTRUCTOR')
+  {
+    this.messageTrue = true;
+    this.reSTR = "Potvrď prihlásenie cez Email";
+    this.user.confirmPassword = 'INSTRUCTOR'
+    this.http.post('http://localhost:8080/register', this.user).subscribe(
+      (data: any) => {
+        if (data.status === 'error')
+        alert(data.message);
+        else
+        alert(data.message);
+      },
+    );
+  }
+  else{
+    this.messageTrue = true;
+    this.reSTR = "Potvrď prihlásenie cez Email";
+    this.user.confirmPassword = 'STUDENT'
+    this.http.post('http://localhost:8080/register', this.user).subscribe(
+      (data: any) => {
+        if (data.status === 'error')
+        alert(data.message);
+        else
+        alert(data.message);
+      },
+    );
+  }
+}
 }

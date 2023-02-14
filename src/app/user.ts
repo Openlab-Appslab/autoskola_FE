@@ -5,4 +5,6 @@ export class User {
     email?: string;
     authority?: String;
     confirmPassword?: string;
+    countOfTheory?: string;
+    countOfPractice?: string;
 }

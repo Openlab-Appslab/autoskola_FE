@@ -22,6 +22,8 @@ export class OrganizationService {
   private getAllStudentsInOrganizationUrl = 'http://localhost:8080/returnAllStudentsInOrganization';
   private addStudentsToOrganizationUrl = 'http://localhost:8080/addMembersToOrganization';
   private getCurrentOrganizationIdUrl = 'http://localhost:8080/returnCurrentOrganization';
+  private degreaseTheoryHoursUrl = 'http://localhost:8080/api/degreaseTheoryHours';
+  private degreasePracticeHoursUrl = 'http://localhost:8080/api/degreaseDrivingHours';
 
   saveORG(organization: Organization) {
     return this.http.post<Organization>(this.saveORGUrl, organization);
@@ -66,4 +68,13 @@ export class OrganizationService {
   getCurrentOrganizationId(): Observable<any> {
     return this.http.get<any>(this.getCurrentOrganizationIdUrl);
   }
+
+  degreaseTheoryHours(username: string) {
+    return this.http.post(this.degreaseTheoryHoursUrl, {"username": username});
+  }
+
+  degreasePracticeHours(username: string) {
+    return this.http.post(this.degreasePracticeHoursUrl, {"username": username});
+  }
+
 }
