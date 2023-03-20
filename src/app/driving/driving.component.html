@@ -1,16 +1,142 @@
-<p class="title">Choose a date of driving lesson</p>
-<mat-card class="demo-inline-calendar-card">
-    <mat-calendar [(selected)]="selectedDate" (click)="freeTimesFilter()" [minDate]="minDate" [maxDate]="maxDate"></mat-calendar>
-  </mat-card>
-<!-- <p>Selected date: {{selectedDate}}</p> -->
-
-<div *ngIf="this.selectedDate != null" class="times">
-  <div *ngIf="this.freeTimes" class="time-container">
-    <p (click)="selectTime('7.00')" *ngIf="this.freeTimes.clock7 == true" class="time">7:00</p>
-    <p (click)="selectTime('9.00')" *ngIf="this.freeTimes.clock9 == true" class="time">9:00</p>
-    <p (click)="selectTime('12.00')" *ngIf="this.freeTimes.clock12 == true" class="time">12:00</p>
-    <p (click)="selectTime('15.00')" *ngIf="this.freeTimes.clock15 == true" class="time">15:00</p>
-    <p (click)="selectTime('17.00')" *ngIf="this.freeTimes.clock17 == true" class="time">17:00</p>
+<ng-container *ngIf="this.userRole === 'STUDENT'">
+  <p class="title">Choose a date of driving lesson</p>
+  <mat-card class="demo-inline-calendar-card">
+      <mat-calendar [(selected)]="selectedDate" (click)="freeTimesFilter()" [minDate]="minDate" [maxDate]="maxDate"></mat-calendar>
+    </mat-card>
+  <!-- <p>Selected date: {{selectedDate}}</p> -->
+  
+  <div *ngIf="this.selectedDate != null" class="times">
+    <div *ngIf="this.freeTimes" class="time-container">
+      <p (click)="selectTime('7.00')" *ngIf="this.freeTimes.clock7 == true" class="time">7:00</p>
+      <p (click)="selectTime('9.00')" *ngIf="this.freeTimes.clock9 == true" class="time">9:00</p>
+      <p (click)="selectTime('12.00')" *ngIf="this.freeTimes.clock12 == true" class="time">12:00</p>
+      <p (click)="selectTime('15.00')" *ngIf="this.freeTimes.clock15 == true" class="time">15:00</p>
+      <p (click)="selectTime('17.00')" *ngIf="this.freeTimes.clock17 == true" class="time">17:00</p>
+    </div>
+    <!-- <p class="no-times" *ngIf="freeTimes.length == 0">No free times</p> -->
   </div>
-  <!-- <p class="no-times" *ngIf="freeTimes.length == 0">No free times</p> -->
-</div>
+</ng-container>
+
+<ng-container *ngIf="this.userRole === 'ADMIN'">
+    <div class="container rounded mt-5 bg-white p-md-5">
+        <div class="h2 font-weight-bold">List of driving requests</div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Time</th>
+                        <th scope="col" colspan="2" class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="bg-blue">
+                        <td class="pt-2">
+                            <div class="pl-lg-5 pl-md-3 pl-1 name">Emilia Kollette</div>
+                        </td>
+                        <td class="pt-3 mt-1">25 Mar 2023</td>
+                        <td class="pt-3">11:00 AM</td>
+                        <td class="pt-3"><span role="button" class="fa fa-check pl-3"></span></td>
+                        <td class="pt-3"><span role="button" class="fa fa-times pl-3"></span></td>
+                    </tr>
+                    <tr id="spacing-row">
+                        <td></td>
+                    </tr>
+                    <tr class="bg-blue">
+                        <td class="pt-2">
+                            <div class="pl-lg-5 pl-md-3 pl-1 name">Anny Adams</div>
+                        </td>
+                        <td class="pt-3">25 Mar 2023</td>
+                        <td class="pt-3">11:00 AM</td>
+                        <td class="pt-3"><span role="button" class="fa fa-check pl-3"></span></td>
+                        <td class="pt-3"><span role="button" class="fa fa-times pl-3"></span></td>
+                    </tr>
+                    <tr id="spacing-row">
+                        <td></td>
+                    </tr>
+                    <tr class="bg-blue">
+                        <td class="pt-2">
+                            <div class="pl-lg-5 pl-md-3 pl-1 name">Arnold Linn</div>
+                        </td>
+                        <td class="pt-3">26 Mar 2023</td>
+                        <td class="pt-3">02:00 PM</td>
+                        <td class="pt-3"><span role="button" class="fa fa-check pl-3"></span></td>
+                        <td class="pt-3"><span role="button" class="fa fa-times pl-3"></span></td>
+                    </tr>
+                    <tr id="spacing-row">
+                        <td></td>
+                    </tr>
+                    <tr class="bg-blue">
+                        <td class="pt-2">
+                            <div class="pl-lg-5 pl-md-3 pl-1 name">Josh Limosel</div>
+                        </td>
+                        <td class="pt-3">23 Mar 2023</td>
+                        <td class="pt-3">04:00 PM</td>
+                        <td class="pt-3"><span role="button" class="fa fa-check pl-3"></span></td>
+                        <td class="pt-3"><span role="button" class="fa fa-times pl-3"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="container rounded mt-5 bg-white p-md-5">
+        <div class="h2 font-weight-bold">List of planned driving</div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Done</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="bg-blue">
+                        <td class="pt-2">
+                            <div class="pl-lg-5 pl-md-3 pl-1 name">Emilia Kollette</div>
+                        </td>
+                        <td class="pt-3 mt-1">25 Mar 2023</td>
+                        <td class="pt-3">11:00 AM</td>
+                        <td class="pt-3"><span role="button" class="fa fa-check pl-3"></span></td>
+                    </tr>
+                    <tr id="spacing-row">
+                        <td></td>
+                    </tr>
+                    <tr class="bg-blue">
+                        <td class="pt-2">
+                            <div class="pl-lg-5 pl-md-3 pl-1 name">Anny Adams</div>
+                        </td>
+                        <td class="pt-3">25 Mar 2023</td>
+                        <td class="pt-3">11:00 AM</td>
+                        <td class="pt-3"><span role="button" class="fa fa-check pl-3"></span></td>
+                    </tr>
+                    <tr id="spacing-row">
+                        <td></td>
+                    </tr>
+                    <tr class="bg-blue">
+                        <td class="pt-2">
+                            <div class="pl-lg-5 pl-md-3 pl-1 name">Arnold Linn</div>
+                        </td>
+                        <td class="pt-3">26 Mar 2023</td>
+                        <td class="pt-3">02:00 PM</td>
+                        <td class="pt-3"><span role="button" class="fa fa-check pl-3"></span></td>
+                    </tr>
+                    <tr id="spacing-row">
+                        <td></td>
+                    </tr>
+                    <tr class="bg-blue">
+                        <td class="pt-2">
+                            <div class="pl-lg-5 pl-md-3 pl-1 name">Josh Limosel</div>
+                        </td>
+                        <td class="pt-3">23 Mar 2023</td>
+                        <td class="pt-3">04:00 PM</td>
+                        <td class="pt-3"><span role="button" class="fa fa-check pl-3"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</ng-container>
