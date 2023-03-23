@@ -24,63 +24,31 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">Name</th>
+                        <th scope="col">Username</th>
                         <th scope="col">Date</th>
                         <th scope="col">Time</th>
                         <th scope="col" colspan="2" class="text-center">Actions</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr class="bg-blue">
+                <tbody *ngFor="let request of requests" id="requestTable">
+                    <tr class="bg-blue" id="1">
                         <td class="pt-2">
-                            <div class="pl-lg-5 pl-md-3 pl-1 name">Emilia Kollette</div>
+                            <div class="pl-lg-5 pl-md-3 pl-1 name">{{request.userEntity.username}}</div>
                         </td>
-                        <td class="pt-3 mt-1">25 Mar 2023</td>
-                        <td class="pt-3">11:00 AM</td>
-                        <td class="pt-3"><span role="button" class="fa fa-check pl-3"></span></td>
-                        <td class="pt-3"><span role="button" class="fa fa-times pl-3"></span></td>
+                        <td class="pt-3 mt-1">{{request.reservationDay.reservationDate | date: 'dd MMM yyyy'}}</td>
+                        <td class="pt-3">{{request.time}}</td>
+                        <td class="pt-3"><span role="button" (click)="acceptRow('1')" class="fa fa-check pl-3"></span></td>
+                        <td class="pt-3" id="1x"><span role="button" (click)="removeRow('1')" class="fa fa-times pl-3"></span></td>
                     </tr>
                     <tr id="spacing-row">
                         <td></td>
-                    </tr>
-                    <tr class="bg-blue">
-                        <td class="pt-2">
-                            <div class="pl-lg-5 pl-md-3 pl-1 name">Anny Adams</div>
-                        </td>
-                        <td class="pt-3">25 Mar 2023</td>
-                        <td class="pt-3">11:00 AM</td>
-                        <td class="pt-3"><span role="button" class="fa fa-check pl-3"></span></td>
-                        <td class="pt-3"><span role="button" class="fa fa-times pl-3"></span></td>
-                    </tr>
-                    <tr id="spacing-row">
-                        <td></td>
-                    </tr>
-                    <tr class="bg-blue">
-                        <td class="pt-2">
-                            <div class="pl-lg-5 pl-md-3 pl-1 name">Arnold Linn</div>
-                        </td>
-                        <td class="pt-3">26 Mar 2023</td>
-                        <td class="pt-3">02:00 PM</td>
-                        <td class="pt-3"><span role="button" class="fa fa-check pl-3"></span></td>
-                        <td class="pt-3"><span role="button" class="fa fa-times pl-3"></span></td>
-                    </tr>
-                    <tr id="spacing-row">
-                        <td></td>
-                    </tr>
-                    <tr class="bg-blue">
-                        <td class="pt-2">
-                            <div class="pl-lg-5 pl-md-3 pl-1 name">Josh Limosel</div>
-                        </td>
-                        <td class="pt-3">23 Mar 2023</td>
-                        <td class="pt-3">04:00 PM</td>
-                        <td class="pt-3"><span role="button" class="fa fa-check pl-3"></span></td>
-                        <td class="pt-3"><span role="button" class="fa fa-times pl-3"></span></td>
-                    </tr>
-                </tbody>
+                    </tbody>
             </table>
         </div>
     </div>
+</ng-container>
 
+<ng-container *ngIf="this.userRole === 'ADMIN'">
     <div class="container rounded mt-5 bg-white p-md-5">
         <div class="h2 font-weight-bold">List of planned driving</div>
         <div class="table-responsive">
@@ -93,49 +61,49 @@
                         <th scope="col">Done</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr class="bg-blue">
+                <tbody id="plannedTable">
+                    <tr class="bg-blue" id="10">
                         <td class="pt-2">
                             <div class="pl-lg-5 pl-md-3 pl-1 name">Emilia Kollette</div>
                         </td>
                         <td class="pt-3 mt-1">25 Mar 2023</td>
                         <td class="pt-3">11:00 AM</td>
-                        <td class="pt-3"><span role="button" class="fa fa-check pl-3"></span></td>
+                        <td class="pt-3"><span role="button" (click)="doneDriving('10')" class="fa fa-check pl-3"></span></td>
                     </tr>
                     <tr id="spacing-row">
                         <td></td>
                     </tr>
-                    <tr class="bg-blue">
+                    <tr class="bg-blue" id="20">
                         <td class="pt-2">
                             <div class="pl-lg-5 pl-md-3 pl-1 name">Anny Adams</div>
                         </td>
                         <td class="pt-3">25 Mar 2023</td>
                         <td class="pt-3">11:00 AM</td>
-                        <td class="pt-3"><span role="button" class="fa fa-check pl-3"></span></td>
+                        <td class="pt-3"><span role="button" (click)="removeRow('20')" class="fa fa-check pl-3"></span></td>
                     </tr>
                     <tr id="spacing-row">
                         <td></td>
                     </tr>
-                    <tr class="bg-blue">
+                    <tr class="bg-blue" id="30">
                         <td class="pt-2">
                             <div class="pl-lg-5 pl-md-3 pl-1 name">Arnold Linn</div>
                         </td>
                         <td class="pt-3">26 Mar 2023</td>
                         <td class="pt-3">02:00 PM</td>
-                        <td class="pt-3"><span role="button" class="fa fa-check pl-3"></span></td>
+                        <td class="pt-3"><span role="button" (click)="removeRow('30')" class="fa fa-check pl-3"></span></td>
                     </tr>
                     <tr id="spacing-row">
                         <td></td>
                     </tr>
-                    <tr class="bg-blue">
+                    <tr class="bg-blue" id="40">
                         <td class="pt-2">
-                            <div class="pl-lg-5 pl-md-3 pl-1 name">Josh Limosel</div>
+                            <div class="pl-lg-5 pl-md-3 pl-1 name">Emilia Kollette</div>
                         </td>
-                        <td class="pt-3">23 Mar 2023</td>
-                        <td class="pt-3">04:00 PM</td>
-                        <td class="pt-3"><span role="button" class="fa fa-check pl-3"></span></td>
+                        <td class="pt-3 mt-1">25 Mar 2023</td>
+                        <td class="pt-3">11:00 AM</td>
+                        <td class="pt-3"><span role="button" (click)="removeRow('40')" class="fa fa-check pl-3"></span></td>
                     </tr>
-                </tbody>
+                    </tbody>
             </table>
         </div>
     </div>

@@ -34,4 +34,9 @@ describe('DrivingComponent', () => {
     component.freeTimesFilter();
     expect(component.freeTimes).toBeTruthy();
   });
+
+  it('should remove a row', () => {
+    component.removeRow('1');
+    expect(component.removeRow).toBeTruthy();
+  });
 });
