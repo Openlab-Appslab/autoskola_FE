@@ -8,11 +8,11 @@ export class DrivingService {
 
   constructor(private http: HttpClient) { }
 
-  private saveDrivingDateUrl = 'http://localhost:8080/newReservation';
-  private reserveDayTimeUrl = 'http://localhost:8080/reserveDayTime';
-  private reservationForInstrucorUrl = 'http://localhost:8080/requestForInstructor';
-  private reservationAccptedUrl = 'http://localhost:8080/reservationAccepted';
-  private acceptedForInstructorUrl = 'http://localhost:8080/acceptedForInstructor';
+  private saveDrivingDateUrl = 'https://autoskolabe-production.up.railway.app/newReservation';
+  private reserveDayTimeUrl = 'https://autoskolabe-production.up.railway.app/reserveDayTime';
+  private reservationForInstrucorUrl = 'https://autoskolabe-production.up.railway.app/requestForInstructor';
+  private reservationAccptedUrl = 'https://autoskolabe-production.up.railway.app/reservationAccepted';
+  private acceptedForInstructorUrl = 'https://autoskolabe-production.up.railway.app/acceptedForInstructor';
 
   reserveDrivingDate(drivingDate: any, id_organization: number) {
     return this.http.post(this.saveDrivingDateUrl, {"reservationDate": drivingDate, "autoskolaOrganization": {"id_organization": id_organization}});
