@@ -12,8 +12,8 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    if (!window.location.href.includes('login') && this.authority === undefined && !window.location.href.includes('registration')) {
-    this.authService.getAuthority().subscribe(
+    if (!window.location.href.includes('login') && this.authority === undefined && !window.location.href.includes('registration') && sessionStorage.getItem('token') !== null) {
+      this.authService.getAuthority().subscribe(
       (data: any) => {
         this.authority = data.authority;
       }

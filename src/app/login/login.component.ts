@@ -20,11 +20,12 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.token !== undefined) {
     this.authService.sendConfirmationToken(this.token).subscribe(
       (data: any) => {
         console.log(data);
       }
-    );
+    )};
   }
 
   login() {

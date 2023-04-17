@@ -10,7 +10,9 @@ export class DrivingService {
 
   private saveDrivingDateUrl = 'http://localhost:8080/newReservation';
   private reserveDayTimeUrl = 'http://localhost:8080/reserveDayTime';
-  private reservationForInstrucorUrl = 'http://localhost:8080/reservationForInstructor';
+  private reservationForInstrucorUrl = 'http://localhost:8080/requestForInstructor';
+  private reservationAccptedUrl = 'http://localhost:8080/reservationAccepted';
+  private acceptedForInstructorUrl = 'http://localhost:8080/acceptedForInstructor';
 
   reserveDrivingDate(drivingDate: any, id_organization: number) {
     return this.http.post(this.saveDrivingDateUrl, {"reservationDate": drivingDate, "autoskolaOrganization": {"id_organization": id_organization}});
@@ -22,5 +24,13 @@ export class DrivingService {
 
   reservationForInstructor() {
     return this.http.get(this.reservationForInstrucorUrl);
+  }
+
+  reservationAccpted(request: any) {
+    return this.http.post(this.reservationAccptedUrl, request);
+  }
+
+  acceptedForInstructor() {
+    return this.http.get(this.acceptedForInstructorUrl);
   }
 }

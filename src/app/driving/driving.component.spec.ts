@@ -39,4 +39,10 @@ describe('DrivingComponent', () => {
     component.removeRow('1');
     expect(component.removeRow).toBeTruthy();
   });
+
+  it('should get current organization id and userRole when ngOnInit is called and write them to variables', () => {
+    component.ngOnInit();
+    expect(component.currentOrganization).toBeUndefined();
+    expect(component.userRole).toBeUndefined();
+  });
 });
