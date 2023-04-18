@@ -30,9 +30,8 @@ export class OrganizationComponent implements OnInit {
         this.organizationService.getCurrentOrganizationId(),
         this.authService.getAuthority(),
         this.organizationService.getAllStudentsInWaitingRoom(),
-        this.organizationService.getAllStudentsInOrganization()
       ]).subscribe(
-        ([organi, authority, waitingRoom, users]) => {
+        ([organi, authority, waitingRoom]) => {
           if (organi === null){
             this.organizationId = null;
           }
@@ -42,16 +41,20 @@ export class OrganizationComponent implements OnInit {
           }
           this.user.authority = authority;
           this.waitingRoom = waitingRoom;
-          this.usersInOrganization = users;
-          if (this.usersInOrganization !== null){
-          for (let i = 0; i < this.usersInOrganization.length; i++) {
-            for (let j = 0; j < this.waitingRoom.length; j++) {
-              if (this.usersInOrganization[i].id === this.waitingRoom[j].id) {
-                this.waitingRoom.splice(j, 1);
+          this.organizationService.getAllStudentsInOrganization().subscribe(
+            (users) => {
+              this.usersInOrganization = users;
+              if (this.usersInOrganization !== null){
+                for (let i = 0; i < this.usersInOrganization.length; i++) {
+                  for (let j = 0; j < this.waitingRoom.length; j++) {
+                    if (this.usersInOrganization[i].id === this.waitingRoom[j].id) {
+                      this.waitingRoom.splice(j, 1);
+                    }
+                  }
+                }
               }
             }
-          }
-        }
+          );
         }
       );
   }
