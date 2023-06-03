@@ -1,23 +1,30 @@
 <ng-container *ngIf="this.userRole === 'STUDENT'">
-    <p class="title">Choose a date of driving lesson</p>
-    <mat-card class="demo-inline-calendar-card">
-        <mat-calendar [(selected)]="selectedDate" (click)="freeTimesFilter()" [minDate]="minDate" [maxDate]="maxDate"></mat-calendar>
-      </mat-card>
-    <!-- <p>Selected date: {{selectedDate}}</p> -->
-    
-    <div *ngIf="this.selectedDate != null" class="times">
-      <div *ngIf="this.freeTimes" class="time-container">
-        <p (click)="selectTime('7.00')" *ngIf="this.freeTimes.clock7 == true" class="time">7:00</p>
-        <p (click)="selectTime('9.00')" *ngIf="this.freeTimes.clock9 == true" class="time">9:00</p>
-        <p (click)="selectTime('12.00')" *ngIf="this.freeTimes.clock12 == true" class="time">12:00</p>
-        <p (click)="selectTime('15.00')" *ngIf="this.freeTimes.clock15 == true" class="time">15:00</p>
-        <p (click)="selectTime('17.00')" *ngIf="this.freeTimes.clock17 == true" class="time">17:00</p>
-      </div>
-      <!-- <p class="no-times" *ngIf="freeTimes.length == 0">No free times</p> -->
-    </div>
-  </ng-container>
-  
-  <ng-container *ngIf="this.userRole === 'ADMIN'">
+    <body>
+        <div id="title" class="slide header">
+            <h1>Choose a date that suits you</h1>
+        </div>
+        <div id="slide1" class="slide">
+            <h1 class="slidetitle">Offer of free dates</h1>
+            <mat-card class="demo-inline-calendar-card">
+                <mat-calendar [(selected)]="selectedDate" (click)="freeTimesFilter()" [minDate]="minDate" [maxDate]="maxDate"></mat-calendar>
+              </mat-card>
+            <!-- <p>Selected date: {{selectedDate}}</p> -->
+
+            <div *ngIf="this.selectedDate != null" class="times">
+              <div *ngIf="this.freeTimes" class="time-container">
+                <p (click)="selectTime('7.00')" *ngIf="this.freeTimes.clock7 == true" class="time">7:00</p>
+                <p (click)="selectTime('9.00')" *ngIf="this.freeTimes.clock9 == true" class="time">9:00</p>
+                <p (click)="selectTime('12.00')" *ngIf="this.freeTimes.clock12 == true" class="time">12:00</p>
+                <p (click)="selectTime('15.00')" *ngIf="this.freeTimes.clock15 == true" class="time">15:00</p>
+                <p (click)="selectTime('17.00')" *ngIf="this.freeTimes.clock17 == true" class="time">17:00</p>
+              </div>
+              <!-- <p class="no-times" *ngIf="freeTimes.length == 0">No free times</p> -->
+              </div>
+        </div>
+    </body>
+</ng-container>
+
+<ng-container *ngIf="this.userRole === 'ADMIN'">
       <div class="container rounded mt-5 bg-white p-md-5">
           <div class="h2 font-weight-bold">List of driving requests</div>
           <div class="table-responsive">
@@ -69,7 +76,7 @@
                           </td>
                           <td class="pt-3 mt-1">{{planned.reservationDay.reservationDate | date: 'dd MMM yyyy'}}</td>
                           <td class="pt-3">{{planned.time}}</td>
-                          <td class="pt-3"><span role="button" (click)="doneDriving('1')" class="fa fa-check pl-3"></span></td>
+                          <td class="pt-3"><span role="button" (click)="doneDriving(planned, '1')" class="fa fa-check pl-3"></span></td>
                       </tr>
                       <tr id="spacing-row">
                           <td></td>

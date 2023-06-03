@@ -1,20 +1,18 @@
 .install span {
     font-size: 12px;
 }
-  
+
 .col-md-4 {
     margin-top: 27px;
 }
-.btn{
+
+.btn {
     background-color: #5469d4;
 }
-.btn:hover{
+
+.btn:hover {
     background-color: #5469d4;
 }
-
-
-
-/*  WELCOME SECTION  */
 
 #welcome-section {
     display: flex;
@@ -64,48 +62,46 @@
     color: #fff;
     transition: 0.3s ease-in-out
 }
-    
-    #welcome-section {
-        
-        margin: 0px auto;
-        text-align: center;
-        align-items: center
-    }
-    
-   #welcome-section p {
-    font-size: 2.5rem;
-    }
 
-    #welcome-section h1 {
-        font-size: 3rem;
-    }
-    
-    .button {
-        font-size: 1.5rem;
-    }
+#welcome-section {
+
+    margin: 0px auto;
+    text-align: center;
+    align-items: center
+}
+
+#welcome-section p {
+    font-size: 2.5rem;
+}
+
+#welcome-section h1 {
+    font-size: 3rem;
+}
+
+.button {
+    font-size: 1.5rem;
+}
 
 
 .ratings i {
     color: green;
 }
-  
+
 .install span {
     font-size: 12px;
 }
-  
+
 .col-md-4 {
     margin-top: 27px;
 }
-.btn{
+
+.btn {
     background-color: #5469d4;
 }
-.btn:hover{
+
+.btn:hover {
     background-color: #5469d4;
 }
-
-
-
-/*  WELCOME SECTION  */
 
 #welcome-section {
     display: flex;
@@ -154,29 +150,29 @@
     color: #fff;
     transition: 0.3s ease-in-out
 }
-    
-    #welcome-section {
-        
-        margin: 0px auto;
-        text-align: center;
-        align-items: center
-    }
-    
-   #welcome-section p {
+
+#welcome-section {
+
+    margin: 0px auto;
+    text-align: center;
+    align-items: center
+}
+
+#welcome-section p {
     font-size: 2.5rem;
     color: #5469d4;
-    }
+}
 
-    #welcome-section h1 {
-        font-size: 3rem;
-        color: #5469d4;
-    }
-    
-    .button {
-        font-size: 1.5rem;
-    }
+#welcome-section h1 {
+    font-size: 3rem;
+    color: #5469d4;
+}
 
-.nothing{
+.button {
+    font-size: 1.5rem;
+}
+
+.nothing {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -184,24 +180,131 @@
     text-align: center;
     width: 100%;
     height: 100vh;
-    /* bold */
     font-weight: 700;
     font-size: 4rem;
 }
-.desc{
+
+.desc {
     font-size: 2rem;
     color: #5469d4;
     line-height: 1.2;
 }
-.underline{
-    /* underline text */
+
+.underline {
     text-decoration: underline;
 }
-img{
+
+.name {
+    margin-left: calc(50% - 75px);
+}
+
+@import url(https://fonts.googleapis.com/css?family=Nunito);
+
+html {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    perspective: 1px;
+    transform-style: preserve-3d;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    font-family: Nunito;
+}
+
+h1 {
+    font-size: 250%
+}
+
+p {
+    font-size: 140%;
+    line-height: 150%;
+    color: #333;
+}
+
+.slide {
+    position: relative;
+    padding: 25vh 10%;
+    min-height: 100vh;
+    width: 100vw;
+    box-sizing: border-box;
+    box-shadow: 0 -1px 10px rgba(0, 0, 0, .7);
+    transform-style: inherit;
+}
+
+
+.slide:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 0 8px 1px rgba(0, 0, 0, .7);
+}
+
+.title {
+    width: 50%;
+    padding: 5%;
+    border-radius: 5px;
+    background: rgba(240, 230, 220, .7);
+    box-shadow: 0 0 8px rgba(0, 0, 0, .7);
+}
+
+.slide:nth-child(2n) .title {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.slide:nth-child(2n+1) .title {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.slide,
+.slide:before {
+    background: 50% 50% / cover;
+}
+
+.header {
+    text-align: center;
+    font-size: 175%;
+    color: #fff;
+    text-shadow: 0 2px 2px #000;
+}
+
+#title {
+    background-image: url("https://images.unsplash.com/photo-1485291571150-772bcfc10da5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2128&q=80");
+    z-index: 2;
+}
+
+#title h1 {
+    transform: translateZ(.25px) scale(.75);
+    transform-origin: 50% 100%;
+
+}
+
+#slide1:before {
+    background: rgba(255, 255, 255, .7);
+    transform: translateZ(-1px) scale(2);
+}
+
+img {
     width: 100px;
     height: 100px;
     object-fit: cover;
 }
-.name{
-    margin-left: calc(50% - 75px);
+
+.slidetitle {
+    color: #5469d4;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    transform: translateZ(.25px) scale(.75);
+    transform-origin: 50% 100%;
+    text-align: center;
 }

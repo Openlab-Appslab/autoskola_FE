@@ -37,6 +37,7 @@ export class DrivingComponent implements OnInit {
           });
           this.drivingService.acceptedForInstructor().subscribe((data: any) => {
             this.acceptedRequests = data;
+            console.log(this.acceptedRequests);
           });
       }
       else{
@@ -95,7 +96,10 @@ export class DrivingComponent implements OnInit {
     }
   }
 
-  doneDriving(id: string) {
+  doneDriving(planned: any, id: string) {
+    this.organizationService.reservationDone(planned.id, planned.userEntity.username).subscribe(data => {
+      console.log(data);
+    });
     const tr = document.getElementById(id);
     if (tr) {
       if (confirm('Are you sure that the driving is done?')) {

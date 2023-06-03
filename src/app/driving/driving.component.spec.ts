@@ -36,7 +36,7 @@ describe('DrivingComponent', () => {
   });
 
   it('should remove a row', () => {
-    component.removeRow('1');
+    component.removeRow(0);
     expect(component.removeRow).toBeTruthy();
   });
 

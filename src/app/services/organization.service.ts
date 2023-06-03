@@ -24,6 +24,10 @@ export class OrganizationService {
   private getCurrentOrganizationIdUrl = 'http://localhost:8080/returnCurrentOrganization';
   private degreaseTheoryHoursUrl = 'http://localhost:8080/api/degreaseTheoryHours';
   private degreasePracticeHoursUrl = 'http://localhost:8080/api/degreaseDrivingHours';
+  private sendApologiesUrl = 'http://localhost:8080/sendApologies';
+  private getAllApologiesUrl = 'http://localhost:8080/getApologies';
+  private deleteApologyUrl = 'http://localhost:8080/deleteApology';
+  private reservationDoneUrl = 'http://localhost:8080/reservationDone';
 
   saveORG(organization: Organization) {
     return this.http.post<Organization>(this.saveORGUrl, organization);
@@ -77,4 +81,20 @@ export class OrganizationService {
     return this.http.post(this.degreasePracticeHoursUrl, {"username": username});
   }
 
+  sendApologies(dayOfApology: string, messageToInstructor: string) {
+    return this.http.post(this.sendApologiesUrl, {"dayOfApology": dayOfApology, "messageToInstructor": messageToInstructor});
+  }
+
+  getAllApologies(): Observable<any[]> {
+    return this.http.get<any[]>(this.getAllApologiesUrl);
+  }
+
+  deleteApology(id: number) {
+    return this.http.post(this.deleteApologyUrl, {"id": id});
+  }
+
+  reservationDone(id: string, username: string) {
+    return this.http.post(this.reservationDoneUrl, {"id": id, "userEntity": {"username": username}});
+  }
+  
 }

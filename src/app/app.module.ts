@@ -18,6 +18,10 @@ import { DrivingComponent } from './driving/driving.component';
 import {MatDatepickerModule} from '@angular/material/datepicker'; 
 import { MatCardModule } from '@angular/material/card';
 import {MatNativeDateModule} from '@angular/material/core';
+import { ApologiesComponent } from './apologies/apologies.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatButtonModule} from '@angular/material/button';
+import {MatTableModule} from '@angular/material/table'; 
 
 
 @NgModule({
@@ -28,6 +32,7 @@ import {MatNativeDateModule} from '@angular/material/core';
     RegistrationComponent,
     OrganizationComponent,
     DrivingComponent,
+    ApologiesComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +46,10 @@ import {MatNativeDateModule} from '@angular/material/core';
     MatSelectModule,
     MatDatepickerModule,
     MatCardModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatTableModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }],
   bootstrap: [AppComponent]

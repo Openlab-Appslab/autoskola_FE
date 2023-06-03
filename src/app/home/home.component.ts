@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Organization } from '../organization';
 import { OrganizationService } from '../services/organization.service';
 
+declare const M: any;
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -11,6 +13,7 @@ export class HomeComponent implements OnInit {
 
   organizations: any;
   waitingRoom: any;
+
   constructor(private organizationService: OrganizationService) { }
 
   ngOnInit(): void {
