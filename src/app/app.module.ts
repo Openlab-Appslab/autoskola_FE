@@ -21,7 +21,8 @@ import {MatNativeDateModule} from '@angular/material/core';
 import { ApologiesComponent } from './apologies/apologies.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
-import {MatTableModule} from '@angular/material/table'; 
+import {MatTableModule} from '@angular/material/table';
+import { TestsComponent } from './tests/tests.component'; 
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import {MatTableModule} from '@angular/material/table';
     OrganizationComponent,
     DrivingComponent,
     ApologiesComponent,
+    TestsComponent,
   ],
   imports: [
     BrowserModule,

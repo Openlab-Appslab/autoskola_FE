@@ -1,0 +1,19 @@
+<form *ngIf="testID == null" class="form-inline">
+    <div class="form-group">
+      <label for="test-name">Test name</label>
+      <input [(ngModel)]="nameOfTest" type="text" class="form-control" id="test-name" placeholder="Enter test name" name="test-name">
+    </div>
+    <button (click)="saveTestName()" type="submit" class="btn btn-primary">Save Test</button>
+  </form>
+
+  <form [formGroup]="dynamicForm" *ngIf="testID != null">
+    <div formArrayName="fields">
+      <div *ngFor="let field of getFormArrayControls(); let i = index">
+        <input type="text" [formControlName]="i" placeholder="Field {{ i + 1 }}" (input)="updateQuestion(i, $any($event.target).value)" />
+        <input type="file" (change)="onFileSelected($event, i)" />
+        <button type="button" (click)="removeField(i)">Remove</button>
+      </div>
+    </div>
+    <button type="button" (click)="addField()">Add Field</button>
+    <button type="button" (click)="saveQuestionAndImage()">Save Questions and Images</button>
+  </form>

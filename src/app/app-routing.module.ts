@@ -8,6 +8,7 @@ import { DisableLoginGuard } from './disable-login.guard';
 import { OrganizationComponent } from './organization/organization.component';
 import { DrivingComponent } from './driving/driving.component';
 import { ApologiesComponent } from './apologies/apologies.component';
+import { TestsComponent } from './tests/tests.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -17,6 +18,7 @@ const routes: Routes = [
     { path: 'organization', component: OrganizationComponent, canActivate: [AuthenticationGuard]},
     { path: 'driving', component: DrivingComponent, canActivate: [AuthenticationGuard]},
     { path: 'apologies', component: ApologiesComponent, canActivate: [AuthenticationGuard]},
+    { path: 'tests', component: TestsComponent, canActivate: [AuthenticationGuard]},
     { path: '**', redirectTo: 'login', pathMatch: 'full' }
 ];
 
