@@ -6,10 +6,17 @@
     <button (click)="saveTestName()" type="submit" class="btn btn-primary">Save Test</button>
   </form>
 
+  <!--  Why when I click Add Field button, next question checkboxes are checked? -->
   <form [formGroup]="dynamicForm" *ngIf="testID != null">
     <div formArrayName="fields">
       <div *ngFor="let field of getFormArrayControls(); let i = index">
         <input type="text" [formControlName]="i" placeholder="Field {{ i + 1 }}" (input)="updateQuestion(i, $any($event.target).value)" />
+        <input type="text" [id]="'answer1' + i" placeholder="Answer 1" (input)="updateAnswer(i, $any($event.target).value, 'answer1')" />
+        <input type="checkbox" [id]="'correctAnswer1' + i" [value]="'correctAnswer1'" (click)="updateCorrectAnswer(i, $any($event.target).value)"/>
+        <input type="text" [id]="'answer2' + i" placeholder="Answer 2" (input)="updateAnswer(i, $any($event.target).value, 'answer2')" />
+        <input type="checkbox" [id]="'correctAnswer2' + i" [value]="'correctAnswer2'" (click)="updateCorrectAnswer(i, $any($event.target).value)" />
+        <input type="text" [id]="'answer3' + i" placeholder="Answer 3" (input)="updateAnswer(i, $any($event.target).value, 'answer3')" />
+        <input type="checkbox" [id]="'correctAnswer3' + i"[value]="'correctAnswer3'" (click)="updateCorrectAnswer(i, $any($event.target).value)" />
         <input type="file" (change)="onFileSelected($event, i)" />
         <button type="button" (click)="removeField(i)">Remove</button>
       </div>
