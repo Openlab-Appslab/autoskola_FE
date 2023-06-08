@@ -12,6 +12,8 @@ export class TestsService {
   private saveTestImageUrl = 'http://localhost:8080/saveTestImage';
   private saveTestQuestionsUrl = 'http://localhost:8080/saveQuestion';
   private saveAnswerUrl = 'http://localhost:8080/saveAnswer';
+  private getAllTestsUrl = 'http://localhost:8080/getAllTests';
+  private getAllQuestionsInTestUrl = 'http://localhost:8080/getAllQuestionsInTest';
 
   saveTestName(testName: string) {
     return this.http.post(this.saveTestNameUrl, {"nameOfTest": testName});
@@ -27,6 +29,14 @@ export class TestsService {
 
   saveAnswer(textOfAnswer: any, correctOrNot: boolean, id: string) {
     return this.http.post(this.saveAnswerUrl, {"textOfAnswer": textOfAnswer, "correctOrNot": correctOrNot, "autoskolaQuestion": {"id": id}});
+  }
+
+  getAllTests() {
+    return this.http.get(this.getAllTestsUrl);
+  }
+
+  getAllQuestionsInTest(testID: string) {
+    return this.http.post(this.getAllQuestionsInTestUrl, {"id": testID});
   }
 
 }

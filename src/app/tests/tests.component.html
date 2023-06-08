@@ -1,26 +1,113 @@
-<form *ngIf="testID == null" class="form-inline">
-    <div class="form-group">
-      <label for="test-name">Test name</label>
-      <input [(ngModel)]="nameOfTest" type="text" class="form-control" id="test-name" placeholder="Enter test name" name="test-name">
-    </div>
-    <button (click)="saveTestName()" type="submit" class="btn btn-primary">Save Test</button>
-  </form>
-
-  <!--  Why when I click Add Field button, next question checkboxes are checked? -->
-  <form [formGroup]="dynamicForm" *ngIf="testID != null">
-    <div formArrayName="fields">
-      <div *ngFor="let field of getFormArrayControls(); let i = index">
-        <input type="text" [formControlName]="i" placeholder="Field {{ i + 1 }}" (input)="updateQuestion(i, $any($event.target).value)" />
-        <input type="text" [id]="'answer1' + i" placeholder="Answer 1" (input)="updateAnswer(i, $any($event.target).value, 'answer1')" />
-        <input type="checkbox" [id]="'correctAnswer1' + i" [value]="'correctAnswer1'" (click)="updateCorrectAnswer(i, $any($event.target).value)"/>
-        <input type="text" [id]="'answer2' + i" placeholder="Answer 2" (input)="updateAnswer(i, $any($event.target).value, 'answer2')" />
-        <input type="checkbox" [id]="'correctAnswer2' + i" [value]="'correctAnswer2'" (click)="updateCorrectAnswer(i, $any($event.target).value)" />
-        <input type="text" [id]="'answer3' + i" placeholder="Answer 3" (input)="updateAnswer(i, $any($event.target).value, 'answer3')" />
-        <input type="checkbox" [id]="'correctAnswer3' + i"[value]="'correctAnswer3'" (click)="updateCorrectAnswer(i, $any($event.target).value)" />
-        <input type="file" (change)="onFileSelected($event, i)" />
-        <button type="button" (click)="removeField(i)">Remove</button>
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+      <div class="d-grid gap-2 mb-3">
+        <button class="btn btn-primary btn-lg" (click)="showMakeTestForm()">Make a test</button>
+      </div>
+      <div class="d-grid gap-2">
+        <button class="btn btn-secondary btn-lg" (click)="showListOfTestsFunction()">Take a test</button>
       </div>
     </div>
-    <button type="button" (click)="addField()">Add Field</button>
-    <button type="button" (click)="saveQuestionAndImage()">Save Questions and Images</button>
-  </form>
+  </div>
+
+  <div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+      <div class="card" *ngIf="showMakeTest">
+        <div class="card-header text-center">
+          <h4 class="card-title">Create a new test</h4>
+        </div>
+        <div class="card-body">
+          <form *ngIf="testID == null">
+            <div class="mb-3">
+              <label for="test-name" class="form-label">Test name</label>
+              <input [(ngModel)]="nameOfTest" type="text" class="form-control" id="test-name"
+                placeholder="Enter test name" name="test-name">
+            </div>
+            <button (click)="saveTestName()" type="submit" class="btn btn-primary">Save Test</button>
+          </form>
+
+          <form [formGroup]="dynamicForm" *ngIf="testID != null">
+            <div formArrayName="fields">
+              <div *ngFor="let field of getFormArrayControls(); let i = index">
+                <div class="mb-3">
+                  <label for="question{{i}}" class="form-label">Question {{i + 1}}</label>
+                  <input type="text" [formControlName]="i" class="form-control" id="question{{i}}"
+                    placeholder="Enter question" (input)="updateQuestion(i, $any($event.target).value)" />
+                </div>
+                <div class="mb-3">
+                  <label for="answer1{{i}}" class="form-label">Answer 1</label>
+                  <input type="text" [id]="'answer1' + i" class="form-control" placeholder="Enter answer"
+                    (input)="updateAnswer(i, $any($event.target).value, 'answer1')" />
+                  <div class="form-check">
+                    <input type="checkbox" [id]="'correctAnswer1' + i" [value]="'correctAnswer1'"
+                      class="form-check-input" (click)="updateCorrectAnswer(i, $any($event.target).value)" />
+                    <label class="form-check-label" for="'correctAnswer1' + i">Correct answer</label>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="answer2{{i}}" class="form-label">Answer 2</label>
+                  <input type="text" [id]="'answer2' + i" class="form-control" placeholder="Enter answer"
+                    (input)="updateAnswer(i, $any($event.target).value, 'answer2')" />
+                  <div class="form-check">
+                    <input type="checkbox" [id]="'correctAnswer2' + i" [value]="'correctAnswer2'"
+                      class="form-check-input" (click)="updateCorrectAnswer(i, $any($event.target).value)" />
+                    <label class="form-check-label" for="'correctAnswer2' + i">Correct answer</label>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="answer3{{i}}" class="form-label">Answer 3</label>
+                  <input type="text" [id]="'answer3' + i" class="form-control" placeholder="Enter answer"
+                    (input)="updateAnswer(i, $any($event.target).value, 'answer3')" />
+                  <div class="form-check">
+                    <input type="checkbox" [id]="'correctAnswer3' + i" [value]="'correctAnswer3'"
+                      class="form-check-input" (click)="updateCorrectAnswer(i, $any($event.target).value)" />
+                    <label class="form-check-label" for="'correctAnswer3' + i">Correct answer</label>
+                  </div>
+                </div>
+                <div class="mb-3 text-center">
+                  <label for="image{{i}}" class="form-label">Image of question</label>
+                  <br>
+                  <img *ngIf="questionAndImage[i]?.containImage" [srcset]="questionAndImage[i]?.imageToShow" class="img-fluid" alt="Question image">
+                  <input type="file" id="imageInput{{i}}" class="form-control" (change)="onFileSelected($event, i)" />
+                  <br>
+                  <button *ngIf="questionAndImage[i]?.containImage" class="btn btn-danger mt-2" (click)="removeImage(i)">Remove Image</button>
+                </div>                
+                <div class="text-center">
+                  <button type="button" class="btn btn-danger" (click)="removeField(i)">Remove question</button>
+                </div>
+                <hr />
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <button type="button" class="btn btn-primary" (click)="addField()">Add new question</button>
+              </div>
+              <div class="col-md-6 text-end">
+                <button type="button" class="btn btn-success" (click)="saveQuestionAndImage()">Save Questions and
+                  Images</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="card" *ngIf="showListOfTests">
+        <div class="card-header">
+          <h4 class="card-title">List of Tests</h4>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6" *ngFor="let test of allTests">
+              <div class="card mb-3 custom-hover" (click)="goToTest(test.id)">
+                <div class="card-body text-center">
+                  <a class="test-text-color">{{ test.nameOfTest}}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
