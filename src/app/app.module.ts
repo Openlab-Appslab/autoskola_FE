@@ -23,7 +23,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
 import { TestsComponent } from './tests/tests.component';
-import { TakeTestComponent } from './take-test/take-test.component'; 
+import { TakeTestComponent } from './take-test/take-test.component';
+import { ChatComponent } from './chat/chat.component'; 
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { TakeTestComponent } from './take-test/take-test.component';
     ApologiesComponent,
     TestsComponent,
     TakeTestComponent,
+    ChatComponent,
   ],
   imports: [
     BrowserModule,

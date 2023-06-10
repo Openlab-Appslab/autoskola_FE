@@ -1,0 +1,73 @@
+<div class="container content align-items-center justify-content-center" *ngIf="whoIam.authority === 'STUDENT'">
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+          <div class="card-header">Chat</div>
+          <div class="card-body w-100">
+            <ul class="chat-list" #chatContainer>
+              <li *ngFor="let message of messages" [class.in]="message.userSender.username !== whoIam.username" [class.out]="message.userSender.username === whoIam.username">
+                <div class="chat-body">
+                  <div class="chat-message">
+                    <h5>{{ message.userSender.username }}</h5>
+                    <p>{{ message.message }}</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <div *ngIf="messages.length === 0" class="text-center">
+                <p>No messages</p>
+              </div>
+            <div class="d-flex">
+              <input type="text" [(ngModel)]="message" placeholder="Type your message" class="form-control">
+              <button class="btn btn-primary ml-2" (click)="sendMessage()">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+<div class="container mt-3">
+  <div *ngIf="whoIam.authority === 'ADMIN' && !isChatPage()">
+    <div class="row">
+      <div class="col-md-4 mb-3" *ngFor="let contact of acceptedContacts">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2 class="card-title">{{ contact }}</h2>
+            <button class="btn btn-primary" (click)="getMessages(contact)" [routerLink]="['/chat', contact]">Open Chat</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container content justify-content-center" *ngIf="whoIam.authority === 'ADMIN' && isChatPage()">
+  <div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="card">
+        <div class="card-header">Chat</div>
+        <div class="card-body w-100">
+          <ul class="chat-list" #chatContainer *ngIf="messages.length > 0"> 
+            <li *ngFor="let message of messages" [class.in]="message.userSender.username !== whoIam.username" [class.out]="message.userSender.username === whoIam.username">
+              <div class="chat-body">
+                <div class="chat-message">
+                  <h5>{{ message.userSender.username }}</h5>
+                  <p>{{ message.message }}</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <div *ngIf="messages.length === 0" class="text-center">
+            <p>No messages</p>
+          </div>
+          <div class="d-flex">
+            <input type="text" [(ngModel)]="message" placeholder="Type your message" class="form-control"> 
+            <button class="btn btn-primary ml-2" (click)="sendMessage()">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

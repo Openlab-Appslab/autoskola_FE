@@ -10,6 +10,7 @@ import { DrivingComponent } from './driving/driving.component';
 import { ApologiesComponent } from './apologies/apologies.component';
 import { TestsComponent } from './tests/tests.component';
 import { TakeTestComponent } from './take-test/take-test.component';
+import { ChatComponent } from './chat/chat.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -20,6 +21,8 @@ const routes: Routes = [
     { path: 'driving', component: DrivingComponent, canActivate: [AuthenticationGuard]},
     { path: 'apologies', component: ApologiesComponent, canActivate: [AuthenticationGuard]},
     { path: 'tests', component: TestsComponent, canActivate: [AuthenticationGuard]},
+    { path: 'chat', component: ChatComponent, canActivate: [AuthenticationGuard]},
+    { path: 'chat/:receiver', component: ChatComponent, canActivate: [AuthenticationGuard]},
     { path: 'takeTest/:id', component: TakeTestComponent, canActivate: [AuthenticationGuard]},
     { path: '**', redirectTo: 'login', pathMatch: 'full' }
 ];
