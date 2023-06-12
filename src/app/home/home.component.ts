@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Organization } from '../organization';
 import { OrganizationService } from '../services/organization.service';
 
-declare const M: any;
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -13,10 +11,16 @@ export class HomeComponent implements OnInit {
 
   organizations: any;
   waitingRoom: any;
+  studentInfo: any[] = [];
 
   constructor(private organizationService: OrganizationService) { }
 
   ngOnInit(): void {
+    this.organizationService.getInfoForStudent().subscribe(
+      (data: any) => {
+        this.studentInfo = data;
+        console.log(this.studentInfo);
+      });
     this.organizationService.allORG().subscribe(data => {
       if (data.length > 0) {
         this.organizations = data;
@@ -31,6 +35,7 @@ export class HomeComponent implements OnInit {
       (data: any) => {
         if (data.length > 0) {
           this.waitingRoom = data;
+          console.log(this.waitingRoom);
         }
       }
     );

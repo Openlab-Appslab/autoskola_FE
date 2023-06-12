@@ -34,7 +34,7 @@
       <div class="col-md-4 mb-3" *ngFor="let contact of acceptedContacts">
         <div class="card h-100">
           <div class="card-body">
-            <h2 class="card-title">{{ contact }}</h2>
+            <h3 class="card-title">{{ contact }}</h3>
             <button class="btn btn-primary" (click)="getMessages(contact)" [routerLink]="['/chat', contact]">Open Chat</button>
           </div>
         </div>

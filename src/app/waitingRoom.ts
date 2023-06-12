@@ -8,4 +8,5 @@ export class waitingRoom {
     organization?: Organization;
     username?: string;
     authority?: string;
+    email?: any;
 }

@@ -67,22 +67,18 @@ export class DrivingComponent implements OnInit {
   }
 
   acceptRow(id: number) {
-    const tr = document.getElementById(id.toString());
-    const plannedTable = document.getElementById('plannedTable');
-    const reject = document.getElementById('reject' + id.toString());
-    const space = document.getElementById('spacing-row');
-    if (tr) {
-      tr.remove();
-      plannedTable!.appendChild(space!);
-      plannedTable!.appendChild(tr);
-      reject!.remove();
-      this.requests[id].accept = true;
-      this.drivingService.reservationAccpted(this.requests[id]).subscribe(data => {
+    if (this.requests.length > id) {
+      const acceptedRequest = this.requests[id];
+      acceptedRequest.accept = true;
+      this.drivingService.reservationAccpted(acceptedRequest).subscribe(data => {
         console.log(data);
       });
+      this.acceptedRequests.push(acceptedRequest);
+      this.requests.splice(id, 1);
       alert('Request was successfully accepted');
     }
   }
+  
 
   removeRow(id: number) {
     const tr = document.getElementById(id.toString());

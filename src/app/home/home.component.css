@@ -308,3 +308,78 @@ img {
     transform-origin: 50% 100%;
     text-align: center;
 }
+  
+#student-info .container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f7f7f7;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    height: auto;
+  }
+  
+  #student-info .row {
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  #student-info h1 {
+    color: #5469d4;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    transform: translateZ(.25px) scale(.75);
+    transform-origin: 50% 100%;
+    text-align: center;
+  }
+  
+  #student-info h2 {
+    font-size: 1.5rem;
+    color: #4682b4;
+    margin-bottom: 1rem;
+    margin-left: 0;
+    text-align: center;
+  }
+  
+  #student-info .driving,
+  #student-info .theory {
+    flex-basis: 50%;
+  }
+  
+  #student-info .driving {
+    text-align: left;
+  }
+  
+  #student-info .theory {
+    text-align: right;
+  }
+  
+  #student-info .underline {
+    text-decoration: underline;
+  }
+  
+  #student-info .date {
+    color: #4682b4;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+  
+  #student-info .time {
+    color: #4682b4;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+  
+  #student-info .driving-state {
+    color: #4682b4;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+  

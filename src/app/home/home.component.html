@@ -1,43 +1,100 @@
 <ng-container *ngIf="!waitingRoom && organizations">
-    <body>
-        <div id="title" class="slide header">
-            <h1>Driving school</h1>
-        </div>
-        <div id="slide1" class="slide">
-            <h1 class="slidetitle">Offer of driving schools</h1>
-            <div class="container mt-5">
-                <div class="row">
-                    <div class="col-md-4" *ngFor="let organization of organizations">
-                        <div class="card p-3">
-                            <div class="d-flex flex-row mb-3"><img [srcset]="this.organization.image">
-                                <h1 class="name">{{organization.name_organization}}</h1>
-                            </div>
-                            <h6>{{organization.description_organization}}</h6>
-                            <div class="d-flex justify-content-between install mt-3"><span>Price
-                                    {{organization.price_organization}}€</span>
-                                <button (click)="addToWaitingRoom(this.organization)" type="button"
-                                    class="btn btn-primary">Apply</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+  <body>
+    <div id="title" class="slide header">
+      <h1>Driving school</h1>
+    </div>
+    <div id="slide1" class="slide">
+      <h1 class="slidetitle">Offer of driving schools</h1>
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-md-4" *ngFor="let organization of organizations">
+            <div class="card p-3">
+              <div class="d-flex flex-row mb-3"><img [srcset]="this.organization.image">
+                <h1 class="name">{{organization.name_organization}}</h1>
+              </div>
+              <h6>{{organization.description_organization}}</h6>
+              <div class="d-flex justify-content-between install mt-3"><span>Price
+                  {{organization.price_organization}}€</span>
+                <button (click)="addToWaitingRoom(this.organization)" type="button"
+                  class="btn btn-primary">Apply</button>
+              </div>
             </div>
+          </div>
         </div>
-    </body>
+      </div>
+    </div>
+  </body>
 </ng-container>
 
-<ng-container *ngIf="waitingRoom">
-    <section id="welcome-section">
-        <h1>Hello, {{waitingRoom[0].userEntity.username}}</h1>
-        <p>You are in waiting room for driving school <span
-                class="underline">{{waitingRoom[0].autoskolaOrganization.name_organization}}</span></p>
-        <p>The price for this driving school is <span
-                class="underline">{{waitingRoom[0].autoskolaOrganization.price_organization}}€</span></p>
-        <span class="desc"><span class="underline">Description of driving school:</span>
-            {{waitingRoom[0].autoskolaOrganization.description_organization}}</span>
-        <a><button (click)="cancelWaitingRoom(this.waitingRoom[0].id_waiting)" class="button">Cancel</button></a>
-    </section>
+<ng-container *ngIf="waitingRoom && waitingRoom[0].userEntity.userEntityMembers === null">
+  <section id="welcome-section">
+    <h1>Hello, {{waitingRoom[0].userEntity.username}}</h1>
+    <p>You are in waiting room for driving school <span
+        class="underline">{{waitingRoom[0].autoskolaOrganization.name_organization}}</span></p>
+    <p>The price for this driving school is <span
+        class="underline">{{waitingRoom[0].autoskolaOrganization.price_organization}}€</span></p>
+    <span class="desc"><span class="underline">Description of driving school:</span>
+      {{waitingRoom[0].autoskolaOrganization.description_organization}}</span>
+    <a><button (click)="cancelWaitingRoom(this.waitingRoom[0].id_waiting)" class="button">Cancel</button></a>
+  </section>
 </ng-container>
 <div *ngIf="!waitingRoom && !organizations">
-    <p class="nothing">There is no organization</p>
+  <p class="nothing">There is no organization</p>
 </div>
+
+<ng-container *ngIf="studentInfo && studentInfo.length > 0 && studentInfo[0].userEntity.userEntityMembers !== null">
+  <div id="student-info" class="slide">
+    <h1 class="slidetitle">Your driving and theory status</h1>
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-6 driving text-left">
+          <h2>Driving Count: {{ studentInfo[0].userEntity.countOfDriving }}</h2>
+        </div>
+        <div class="col-md-6 theory text-right">
+          <h2 class="text-right">Theory Count: {{ studentInfo[0].userEntity.countOfTheory }}</h2>
+        </div>
+      </div>
+    </div>
+    <h1 class="slidetitle">Your drivings</h1>
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-4" *ngFor="let driving of studentInfo">
+          <p>
+            <span class="date">Date: {{ driving.reservationDay.reservationDate | date:'dd MMM yyyy' }}</span>
+          </p>
+          <p>
+            <span class="time">Time: {{ driving.time }}</span>
+          </p>
+          <p>
+            <span class="driving-state">Driving state: {{ driving.accept ? 'accepted' : 'not accepted' }}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="waitingRoom && waitingRoom[0].userEntity.userEntityMembers !== null && studentInfo.length === 0">
+  <div id="student-info" class="slide">
+    <h1 class="slidetitle">Your driving and theory status</h1>
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-6 driving text-left">
+          <h2>Driving Count: {{ waitingRoom[0].userEntity.countOfDriving }}</h2>
+        </div>
+        <div class="col-md-6 theory text-right">
+          <h2 class="text-right">Theory Count: {{ waitingRoom[0].userEntity.countOfTheory }}</h2>
+        </div>
+      </div>
+    </div>
+<h1 class="slidetitle mt-5">Your drivings</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center mt-3">
+      <h2 class="driving-state">You do not have any planned driving</h2>
+    </div>
+  </div>
+</div>
+  </div>
+</ng-container>

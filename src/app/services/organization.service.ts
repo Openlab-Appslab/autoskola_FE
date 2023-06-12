@@ -28,6 +28,7 @@ export class OrganizationService {
   private getAllApologiesUrl = 'http://localhost:8080/getApologies';
   private deleteApologyUrl = 'http://localhost:8080/deleteApology';
   private reservationDoneUrl = 'http://localhost:8080/reservationDone';
+  private getInfoForStudentUrl = 'http://localhost:8080/getInfoForStudent';
 
   saveORG(organization: Organization) {
     return this.http.post<Organization>(this.saveORGUrl, organization);
@@ -96,5 +97,8 @@ export class OrganizationService {
   reservationDone(id: string, username: string) {
     return this.http.post(this.reservationDoneUrl, {"id": id, "userEntity": {"username": username}});
   }
-  
+
+  getInfoForStudent() {
+    return this.http.get(this.getInfoForStudentUrl);
+  }
 }
