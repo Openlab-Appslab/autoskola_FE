@@ -2,10 +2,7 @@
   <div class="row justify-content-center mt-5">
     <div class="col-md-6">
       <div class="d-grid gap-2 mb-3">
-        <button class="btn btn-primary btn-lg" (click)="showMakeTestForm()">Make a test</button>
-      </div>
-      <div class="d-grid gap-2">
-        <button class="btn btn-secondary btn-lg" (click)="showListOfTestsFunction()">Take a test</button>
+        <button class="btn btn-primary btn-lg" *ngIf="userRole === 'ADMIN' || userRole === 'INSTRUCTOR'" (click)="showMakeTestForm()">Make a test</button>
       </div>
     </div>
   </div>

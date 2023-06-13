@@ -30,8 +30,8 @@ export class DrivingComponent implements OnInit {
       this.currentOrganization = data.id_organization;
     });
     this.authService.getAuthority().subscribe((data: any) => {
-      if (data.authority === 'ADMIN') {
-        this.userRole = 'ADMIN';
+      if (data.authority === 'ADMIN' || data.authority === 'INSTRUCTOR') {
+        this.userRole = 'INSTRUCTOR';
           this.drivingService.reservationForInstructor().subscribe((data: any) => {
             this.requests = data;
           });

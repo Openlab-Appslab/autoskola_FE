@@ -43,7 +43,7 @@ export class ChatComponent implements OnInit {
               this.getMessages(this.userReceiver);
             }
           );
-        } else if (this.whoIam.authority === 'ADMIN') {
+        } else if (this.whoIam.authority === 'ADMIN' || this.whoIam.authority === 'INSTRUCTOR') {
           this.chatService.getChatContactsAccepted().subscribe(
             (data: any) => {
               for (let i = 0; i < data.length; i++) {

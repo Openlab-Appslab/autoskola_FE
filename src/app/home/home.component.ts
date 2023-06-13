@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Organization } from '../organization';
 import { OrganizationService } from '../services/organization.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -12,8 +13,10 @@ export class HomeComponent implements OnInit {
   organizations: any;
   waitingRoom: any;
   studentInfo: any[] = [];
+  isLogged: boolean;
+  userRole: string;
 
-  constructor(private organizationService: OrganizationService) { }
+  constructor(private organizationService: OrganizationService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.organizationService.getInfoForStudent().subscribe(
@@ -24,10 +27,10 @@ export class HomeComponent implements OnInit {
     this.organizationService.allORG().subscribe(data => {
       if (data.length > 0) {
         this.organizations = data;
-         for (let i = 0; i < this.organizations.length; i++) {
-           this.organizationService.getImage(this.organizations[i].image.id).subscribe((data: any) => {
-             this.organizations[i].image = 'data:image/jpeg;base64,' + data.image;
-           });
+        for (let i = 0; i < this.organizations.length; i++) {
+          this.organizationService.getImage(this.organizations[i].image.id).subscribe((data: any) => {
+            this.organizations[i].image = 'data:image/jpeg;base64,' + data.image;
+          });
         }
       }
     });
@@ -37,6 +40,17 @@ export class HomeComponent implements OnInit {
           this.waitingRoom = data;
           console.log(this.waitingRoom);
         }
+      }
+    );
+    if (sessionStorage.getItem('token') !== null) {
+      this.isLogged = true;
+    }
+    else {
+      this.isLogged = false;
+    }
+    this.authService.getAuthority().subscribe(
+      (data: any) => {
+        this.userRole = data.authority;
       }
     );
   }
@@ -55,5 +69,9 @@ export class HomeComponent implements OnInit {
     this.organizationService.cancelWaitingRoom(id).subscribe(() => {
       window.location.reload();
     });
+  }
+
+  goToLogin() {
+    window.location.href = '/login';
   }
 }

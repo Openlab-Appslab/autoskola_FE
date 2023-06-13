@@ -16,8 +16,8 @@
               <h6>{{organization.description_organization}}</h6>
               <div class="d-flex justify-content-between install mt-3"><span>Price
                   {{organization.price_organization}}€</span>
-                <button (click)="addToWaitingRoom(this.organization)" type="button"
-                  class="btn btn-primary">Apply</button>
+                <button *ngIf="isLogged && userRole !== 'INSTRUCTOR'" (click)="addToWaitingRoom(this.organization)" type="button" class="btn btn-primary">Apply</button>
+                <button *ngIf="!isLogged" (click)="goToLogin()" type="button" class="btn btn-primary">Apply</button>
               </div>
             </div>
           </div>

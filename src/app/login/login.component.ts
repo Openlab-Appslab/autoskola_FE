@@ -20,12 +20,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.token !== undefined) {
-    this.authService.sendConfirmationToken(this.token).subscribe(
-      (data: any) => {
-        console.log(data);
-      }
-    )};
   }
 
   login() {
@@ -36,7 +30,7 @@ export class LoginComponent implements OnInit {
           AppComponent.prototype.authority = data.authority;
         }
       );
-      this.router.navigate(['/home']);
+        window.location.href = '/home';
     });
     }
 }

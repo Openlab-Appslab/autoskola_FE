@@ -24,7 +24,7 @@
     </body>
 </ng-container>
 
-<ng-container *ngIf="this.userRole === 'ADMIN'">
+<ng-container *ngIf="this.userRole === 'ADMIN' || this.userRole === 'INSTRUCTOR'">
       <div class="container rounded mt-5 bg-white p-md-5">
           <div class="h2 font-weight-bold">List of driving requests</div>
           <div class="table-responsive">
@@ -56,7 +56,7 @@
       </div>
   </ng-container>
   
-  <ng-container *ngIf="this.userRole === 'ADMIN'">
+  <ng-container *ngIf="this.userRole === 'ADMIN' || this.userRole === 'INSTRUCTOR'">
       <div class="container rounded mt-5 bg-white p-md-5">
           <div class="h2 font-weight-bold">List of planned driving</div>
           <div class="table-responsive">

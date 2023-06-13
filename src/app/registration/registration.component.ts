@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
-import { AuthService } from '../services/auth.service';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -14,8 +13,7 @@ export class RegistrationComponent implements OnInit {
   checkBadRegister: boolean = false;
   message: Object;
   messageTrue: boolean = false;
-  reSTR: any;
-  constructor(private authService: AuthService, private http: HttpClient) {
+  constructor(private http: HttpClient) {
     this.user = new User();
   }
 
@@ -25,7 +23,6 @@ export class RegistrationComponent implements OnInit {
   onSubmit() {
     if (this.user.authority === 'ADMIN') {
     this.messageTrue = true;
-    this.reSTR = "Potvrď prihlásenie cez Email";
     this.http.post('http://localhost:8080/register', this.user).subscribe(
       (data: any) => {
         if (data.status === 'error')
@@ -38,7 +35,6 @@ export class RegistrationComponent implements OnInit {
   else if (this.user.authority === 'INSTRUCTOR')
   {
     this.messageTrue = true;
-    this.reSTR = "Potvrď prihlásenie cez Email";
     this.user.confirmPassword = 'INSTRUCTOR'
     this.http.post('http://localhost:8080/register', this.user).subscribe(
       (data: any) => {
@@ -51,7 +47,6 @@ export class RegistrationComponent implements OnInit {
   }
   else{
     this.messageTrue = true;
-    this.reSTR = "Potvrď prihlásenie cez Email";
     this.user.confirmPassword = 'STUDENT'
     this.http.post('http://localhost:8080/register', this.user).subscribe(
       (data: any) => {

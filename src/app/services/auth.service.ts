@@ -40,4 +40,8 @@ export class AuthService {
   sendConfirmationToken(token: String){
     return this.http.post(this.sendConfirmationTokenUrl + '?token=' + token, null);
   }
+
+  isLoggedIn() {
+    return sessionStorage.getItem('token');
+  }
 }

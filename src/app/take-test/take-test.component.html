@@ -4,7 +4,7 @@
         <div class="col-md-8">
           <div class="card">
             <div class="card-header">
-              <h1 class="text-center">{{ allQuestionsInTest[0].autoskolaTest.nameOfTest }}</h1>
+              <h1 *ngIf="allQuestionsInTest[0] != undefined" class="text-center">{{ allQuestionsInTest[0].autoskolaTest.nameOfTest }}</h1>
             </div>
             <div class="card-body">
               <form>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TestsService } from '../services/tests.service';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-tests',
@@ -17,13 +18,14 @@ export class TestsComponent implements OnInit {
   allQuestionsInTest: any[] = [];
   dynamicForm: FormGroup;
   showMakeTest = false;
-  showListOfTests = false;
+  showListOfTests = true;
   showButtons = true;
   correctAnswer1: FormControl = new FormControl(false);
   correctAnswer2: FormControl = new FormControl(false);
   correctAnswer3: FormControl = new FormControl(false);
+  userRole: string;
 
-  constructor(private testsService: TestsService, private formBuilder: FormBuilder, private router: Router) { }
+  constructor(private testsService: TestsService, private formBuilder: FormBuilder, private router: Router, private authService: AuthService) {}
 
   ngOnInit() {
     this.dynamicForm = this.formBuilder.group({
@@ -33,6 +35,11 @@ export class TestsComponent implements OnInit {
       (response: any) => {
         this.allTests = response;
         console.log(this.allTests);
+      }
+    );
+    this.authService.getAuthority().subscribe(
+      (data: any) => {
+        this.userRole = data.authority;
       }
     );
   }
@@ -144,6 +151,7 @@ export class TestsComponent implements OnInit {
           }
         );
       }
+      window.location.reload();
     })();
   }
   
