@@ -19,8 +19,8 @@
           <div class="grid grid-cols-12 gap-y-2" *ngFor="let message of messages">
             <div class="col-start-1 col-end-8 p-3 rounded-lg" *ngIf="message.userSender.username !== whoIam.username">
               <div class="flex flex-row items-center">
-                <div class="flex items-center justify-center flex-shrink-0 w-10 h-10 text-white border-black rounded-full bg-violet-500">
-                  {{ message.userSender.username }}
+                <div class="flex items-center justify-center flex-shrink-0 text-white border-black rounded-full bg-violet-500 aspect-w-1 aspect-h-1">
+                  <div class="mt-2 mb-2 ml-2 mr-2 overflow-hidden truncate">{{ message.userSender.username }}</div>
                 </div>
                 <div class="relative px-4 py-2 ml-3 text-sm bg-white shadow rounded-xl">
                   <div>{{ message.message }}</div>
@@ -29,9 +29,9 @@
             </div>
             <div class="col-start-6 col-end-13 p-3 rounded-lg" *ngIf="message.userSender.username === whoIam.username">
               <div class="flex flex-row-reverse items-center justify-start">
-                <div class="flex items-center justify-center flex-shrink-0 w-10 h-10 text-white bg-orange-500 border-black rounded-full">
-                  {{ message.userSender.username }}
-                </div>
+<div class="flex items-center justify-center flex-shrink-0 text-white bg-orange-500 border-black rounded-full aspect-w-1 aspect-h-1">
+  <div class="mt-2 mb-2 ml-2 mr-2 overflow-hidden truncate">{{ message.userSender.username }}</div>
+</div>
                 <div class="relative px-4 py-2 mr-3 text-sm bg-indigo-100 shadow rounded-xl">
                   <div>{{ message.message }}</div>
                 </div>
@@ -74,8 +74,8 @@
           <div class="grid grid-cols-12 gap-y-2" *ngFor="let message of messages">
             <div class="col-start-1 col-end-8 p-3 rounded-lg" *ngIf="message.userSender.username !== whoIam.username">
               <div class="flex flex-row items-center">
-                <div class="flex items-center justify-center flex-shrink-0 w-10 h-10 text-white border-black rounded-full bg-violet-500">
-                  {{ message.userSender.username }}
+                <div class="flex items-center justify-center flex-shrink-0 text-white border-black rounded-full bg-violet-500 aspect-w-1 aspect-h-1">
+                  <div class="mt-2 mb-2 ml-2 mr-2 overflow-hidden truncate">{{ message.userSender.username }}</div>
                 </div>
                 <div class="relative px-4 py-2 ml-3 text-sm bg-white shadow rounded-xl">
                   <div>{{ message.message }}</div>
@@ -84,8 +84,8 @@
             </div>
             <div class="col-start-6 col-end-13 p-3 rounded-lg" *ngIf="message.userSender.username === whoIam.username">
               <div class="flex flex-row-reverse items-center justify-start">
-                <div class="flex items-center justify-center flex-shrink-0 w-10 h-10 text-white bg-orange-500 border-black rounded-full">
-                  {{ message.userSender.username }}
+                <div class="flex items-center justify-center flex-shrink-0 text-white bg-orange-500 border-black rounded-full aspect-w-1 aspect-h-1">
+                  <div class="mt-2 mb-2 ml-2 mr-2 overflow-hidden truncate">{{ message.userSender.username }}</div>
                 </div>
                 <div class="relative px-4 py-2 mr-3 text-sm bg-indigo-100 shadow rounded-xl">
                   <div>{{ message.message }}</div>

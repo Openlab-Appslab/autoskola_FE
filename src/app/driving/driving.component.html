@@ -14,13 +14,13 @@
         </mat-card>
       </div>
       <div *ngIf="this.selectedDate != null">
-        <div *ngIf="this.freeTimes" class="flex justify-between mx-auto my-2 space-x-4 cursor-pointer time-container w-80">
-          <p (click)="selectTime('7.00')" *ngIf="this.freeTimes.clock7 == true" class="border border-gray-300 time">7:00</p>
-          <p (click)="selectTime('9.00')" *ngIf="this.freeTimes.clock9 == true" class="border border-gray-300 time">9:00</p>
-          <p (click)="selectTime('12.00')" *ngIf="this.freeTimes.clock12 == true" class="border border-gray-300 time">12:00</p>
-          <p (click)="selectTime('15.00')" *ngIf="this.freeTimes.clock15 == true" class="border border-gray-300 time">15:00</p>
-          <p (click)="selectTime('17.00')" *ngIf="this.freeTimes.clock17 == true" class="border border-gray-300 time">17:00</p>
-        </div>
+        <div *ngIf="this.freeTimes" class="flex items-center justify-center mt-16 space-x-6">
+  <p (click)="selectTime('7.00')" *ngIf="this.freeTimes.clock7 == true" class="text-2xl border border-gray-300 rounded shadow-md cursor-pointer">7:00</p>
+  <p (click)="selectTime('9.00')" *ngIf="this.freeTimes.clock9 == true" class="text-2xl border border-gray-300 rounded shadow-md cursor-pointer time">9:00</p>
+  <p (click)="selectTime('12.00')" *ngIf="this.freeTimes.clock12 == true" class="text-2xl border border-gray-300 rounded shadow-md cursor-pointer time">12:00</p>
+  <p (click)="selectTime('15.00')" *ngIf="this.freeTimes.clock15 == true" class="text-2xl border border-gray-300 rounded shadow-md cursor-pointer time">15:00</p>
+  <p (click)="selectTime('17.00')" *ngIf="this.freeTimes.clock17 == true" class="text-2xl border border-gray-300 rounded shadow-md cursor-pointer time">17:00</p>
+</div>
       </div>
     </div>
 </ng-container>
