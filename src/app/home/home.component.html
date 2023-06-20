@@ -1,5 +1,8 @@
 <ng-container *ngIf="studentInfo && studentInfo.length > 0 && studentInfo[0].userEntity.userEntityMembers !== null">
-  <div class="mt-40">
+  <div class="mt-32">
+    <div class="mb-20">
+      <h1 class="mb-10 text-center">{{studentInfo[0].userEntity.userEntityMembers.name_organization}}</h1>
+    </div>
     <h1 class="text-xl text-center sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl">Your driving and theory status</h1>
     <div class="container max-w-xl mx-auto mt-5 duration-1000 animate-in fade-in-0 slide-in-from-bottom-20">
       <div class="grid w-full grid-cols-1 gap-4 border-2 border-gray-300 rounded-lg shadow-lg sm:w-lg sm:grid-cols-2">
@@ -36,7 +39,10 @@
 
 
 <ng-container *ngIf="waitingRoom && waitingRoom[0].userEntity.userEntityMembers !== null && studentInfo.length === 0">
-  <div class="mt-40">
+  <div class="mt-32">
+    <div class="mb-20">
+      <h1 class="mb-10 text-center">{{waitingRoom[0].userEntity.userEntityMembers.name_organization}}</h1>
+    </div>
     <h1 class="text-center">Your driving and theory status</h1>
     <div class="container max-w-xl mx-auto mt-5 duration-1000 animate-in fade-in-0 slide-in-from-bottom-20">
       <div class="grid w-full grid-cols-1 gap-4 border-2 border-gray-300 rounded-lg shadow-lg sm:w-lg sm:grid-cols-2">
