@@ -1,37 +1,41 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="canShow()">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="home">Driving school</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav display-flex justify-content-between w-100">
-          <li class="nav-item">
-            <a class="nav-link link1" aria-current="page" routerLink="/home">Home</a>
-          </li>
-          <li class="nav-item" *ngIf="authority === 'ADMIN' || authority === 'INSTRUCTOR'">
-            <a class="nav-link" routerLink="/organization">Organization</a>
-          </li>
-          <li class="nav-item" *ngIf="isLogged">
-            <a class="nav-link" routerLink="/driving" href="#">Driving reservation</a>
-          </li>
-           <li class="nav-item" *ngIf="isLogged">
-            <a class="nav-link" routerLink="/apologies" href="#">Apologies</a>
-          </li>
-          <li class="nav-item" *ngIf="isLogged">
-            <a class="nav-link" routerLink="/tests" href="#">Test</a>
-          </li>
-          <li class="nav-item" *ngIf="isLogged">
-            <a class="nav-link" routerLink="/chat" href="#">Chat</a>
-          </li>
-            <li class="nav-item" *ngIf="isLogged">
-                <a class="nav-link btn btn-danger" href="#" (click)="logout()">Logout</a>
-            </li>
-            <li class="nav-item" *ngIf="!isLogged">
-                <a class="nav-link btn btn-success" routerLink="/login" href="#">Login</a>
-            </li>
-        </ul>
+<nav class="bg-white shadow-lg">
+  <div class="px-4 mx-auto max-w-7xl md:px-6 lg:px-8">
+    <div class="flex justify-between h-16">
+      <div class="flex">
+        <a routerLink="/" class="flex items-center flex-shrink-0">
+          <span class="text-lg font-bold">Driving school</span>
+        </a>
+        <div class="hidden md:-my-px md:ml-6 md:flex md:space-x-4 md:items-center">
+          <a routerLink="/driving" class="nav-link" *ngIf="isLogged">Driving</a>
+          <a routerLink="/organization" class="nav-link" *ngIf="authority === 'ADMIN' || authority === 'INSTRUCTOR'">Organization</a>
+          <a routerLink="/apologies" class="nav-link" *ngIf="isLogged">Apologies</a>
+          <a routerLink="/chat" (click)="removeReceiver()" class="nav-link" *ngIf="isLogged">Chat</a>
+          <a routerLink="/tests" class="nav-link" *ngIf="isLogged">Test</a>
+        </div>
+      </div>
+      <div class="flex md:hidden">
+        <button type="button" class="text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800" aria-label="Toggle menu" onclick="document.getElementById('mobile-menu').classList.toggle('hidden'); document.getElementById('mobile-menu').classList.toggle('block');">
+          <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="hidden md:flex md:items-center md:ml-6">
+        <a routerLink="/login" class="nav-link" *ngIf="!isLogged">Login</a>
+        <button class="nav-link" *ngIf="isLogged" (click)="logout()">Logout</button>
       </div>
     </div>
-    </nav>
+    <div class="hidden md:hidden" id="mobile-menu">
+      <div class="pt-2 pb-3 space-y-1">
+        <a routerLink="/driving" class="nav-link">Driving</a>
+        <a routerLink="/organization" class="nav-link">Organization</a>
+        <a routerLink="/apologies" class="nav-link">Apologies</a>
+        <a routerLink="/chat" class="nav-link">Chat</a>
+        <a routerLink="/tests" class="nav-link">Test</a>
+        <a routerLink="/login" class="nav-link" *ngIf="!isLogged">Login</a>
+        <button class="nav-link" *ngIf="isLogged" (click)="logout()">Logout</button>
+      </div>
+    </div>
+  </div>
+</nav>
 <router-outlet></router-outlet>

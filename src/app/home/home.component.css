@@ -1,4 +1,4 @@
-.install span {
+/* .install span {
     font-size: 12px;
 }
 
@@ -196,9 +196,12 @@
 
 .name {
     margin-left: calc(50% - 75px);
+    font-size: x-large;
 }
 
-@import url(https://fonts.googleapis.com/css?family=Nunito);
+.desc-org{
+    font-size: 1rem;
+}
 
 html {
     height: 100%;
@@ -277,10 +280,7 @@ p {
     text-shadow: 0 2px 2px #000;
 }
 
-#title {
-    background-image: url("https://images.unsplash.com/photo-1485291571150-772bcfc10da5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2128&q=80");
-    z-index: 2;
-}
+
 
 #title h1 {
     transform: translateZ(.25px) scale(.75);
@@ -294,9 +294,9 @@ p {
 }
 
 img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
+    width: 140px;
+    height: 140px;
+    object-fit: contain;
 }
 
 .slidetitle {
@@ -382,4 +382,12 @@ img {
     margin-bottom: 0.5rem;
     text-align: center;
   }
-  
+   */
+.custom-img {
+    background-image: url("https://images.unsplash.com/photo-1485291571150-772bcfc10da5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2128&q=80");
+  }
+h1 {
+    font-size: 300%;
+    /*  make it bold */
+    font-weight: bold;
+}

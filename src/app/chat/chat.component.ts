@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from '../services/chat.service';
-import { ActivatedRoute } from '@angular/router';
 import { interval } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
-import { ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-chat',
@@ -17,9 +15,8 @@ export class ChatComponent implements OnInit {
   whoIam: any = {};
   acceptedContacts: any[] = [];
   messages: any[] = [];
-  @ViewChild('chatContainer') private chatContainer: ElementRef;
 
-  constructor(private chatService: ChatService, private route: ActivatedRoute) { }
+  constructor(private chatService: ChatService) { }
 
   ngOnInit() {
     this.chatService.whoIam().subscribe(
@@ -54,14 +51,10 @@ export class ChatComponent implements OnInit {
                 }
               }
               // get receiver from URL
-              this.userReceiver = this.route.snapshot.paramMap.get('receiver');
+              this.userReceiver = sessionStorage.getItem('receiver');
               this.chatService.chatGet(this.userReceiver, this.whoIam.username).subscribe(
                 (data: any) => {
                   this.messages = data;
-                  setTimeout(() => {
-                    this.scrollToBottom();
-                  }
-                  , 0);
                 }
               );
             }
@@ -71,20 +64,11 @@ export class ChatComponent implements OnInit {
     );
   }
 
-  scrollToBottom(): void {
-    try {
-      this.chatContainer.nativeElement.scrollTop = this.chatContainer.nativeElement.scrollHeight;
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
   isChatPage(): boolean {
-    const urlSegments = this.route.snapshot.url;
-    if (urlSegments.length !== 2 || urlSegments[0].path !== 'chat') {
-      return false;
+    if (sessionStorage.getItem('receiver')) {
+      return true;
     }
-    const username = urlSegments[1].path;
+    const username = sessionStorage.getItem('receiver');
     return !!username;
   }
 
@@ -93,18 +77,11 @@ export class ChatComponent implements OnInit {
       (data: any) => {
         if (this.messages.length !== data.length) {
           this.messages = data;
-          setTimeout(() => {
-            this.scrollToBottom();
-          }, 0);
         }
         else {
           for (let i = 0; i < data.length; i++) {
             if (this.messages[i].id !== data[i].id) {
               this.messages = data;
-              setTimeout(() => {
-                this.scrollToBottom();
-              }, 0);
-              break;
             }
           }
         }
@@ -117,12 +94,20 @@ export class ChatComponent implements OnInit {
       (data: any) => {
         this.message = '';
         this.getMessages(this.userReceiver);
-        this.scrollToBottom();
       },
       (error: any) => {
         console.log(error);
       }
     );
   }
-  
-}  
+
+  getMessagesAndSaveReceiver(receiver: any) {
+    // if receiver in sessionStorage is set, remove it and set new one
+    if (sessionStorage.getItem('receiver')) {
+      sessionStorage.removeItem('receiver');
+    }
+    sessionStorage.setItem('receiver', receiver);
+    this.userReceiver = receiver;
+    this.getMessages(receiver);
+  }
+}

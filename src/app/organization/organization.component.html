@@ -3,7 +3,8 @@
     <div class="loginbackground box-background--white padding-top--64">
       <div class="loginbackground-gridContainer">
         <div class="box-root flex-flex" style="grid-area: top / start / 8 / end;">
-          <div class="box-root" style="background-image: linear-gradient(white 0%, rgb(247, 250, 252) 33%); flex-grow: 1;">
+          <div class="box-root"
+            style="background-image: linear-gradient(white 0%, rgb(247, 250, 252) 33%); flex-grow: 1;">
           </div>
         </div>
         <div class="box-root flex-flex" style="grid-area: 4 / 2 / auto / 5;">
@@ -47,23 +48,21 @@
               </mat-form-field>
               <mat-form-field class="example-full-width" appearance="fill">
                 <mat-label>Describe your organization</mat-label>
-                <textarea matInput [(ngModel)]="organization.description_organization" [ngModelOptions]="{standalone: true}"></textarea>
+                <textarea matInput [(ngModel)]="organization.description_organization"
+                  [ngModelOptions]="{standalone: true}"></textarea>
               </mat-form-field>
               <mat-form-field class="example-full-width" appearance="fill">
                 <mat-label>Price</mat-label>
-                <input matInput type="number" [(ngModel)]="organization.price_organization" [ngModelOptions]="{standalone: true}">
+                <input matInput type="number" [(ngModel)]="organization.price_organization"
+                  [ngModelOptions]="{standalone: true}">
               </mat-form-field>
               <div class="form-group">
                 <span class="padding-bottom--15">Upload your logo</span>
-                <input 
-                    id="file" 
-                    type="file" 
-                    class="form-control"
-                    (change)="onFileChange($event)">
+                <input id="file" type="file" class="form-control" (change)="onFileChange($event)">
                 <img [src]="this.logo" />
-            </div>
+              </div>
               <div class="text-center">
-                <button (click)="sendORG()" class="btn btn-primary">Create</button>
+                <button (click)="sendORG()" class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"type="submit">Create</button>
               </div>
             </form>
           </div>
@@ -75,60 +74,56 @@
 
 <!-- make a list of all users in waiting list by bootstrap table -->
 <div *ngIf="organizationId !== null" class="mt-4">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <h2 class="text-center">Waiting list</h2>
-        <table class="table table-striped table-bordered">
-          <thead>
-            <tr>
-              <th>Username</th>
-              <th>Email</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let user of waitingRoom">
-              <td>{{ user.username }}</td>
-              <td>{{ user.email }}</td>
-              <td class="text-center actions">
-                <button (click)="acceptUser(user.id)" class="btn btn-success">Accept</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="container mt-4">
-  <div class="row">
-    <div class="col-md-12">
-      <h2 class="text-center">Students in ORG</h2>
-      <table class="table table-striped table-bordered">
+  <div class="container mx-auto">
+    <div class="">
+      <h2 class="text-2xl font-bold text-center">Waiting list</h2>
+      <table class="w-full table-auto">
         <thead>
           <tr>
-            <th>Username</th>
-            <th>Authority</th>
-            <th>Count of theory</th>
-            <th>Count of driving</th>
-            <th>Actions</th>
+            <th class="py-2">Username</th>
+            <th class="py-2">Email</th>
+            <th class="py-2">Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let user of usersInOrganization">
-            <td>{{ user.username }}</td>
-            <td>{{ user.authority }}</td>
-            <td>{{ user.countOfTheory }}</td>
-            <td>{{ user.countOfDriving }}</td>
-            <td class="text-center actions">
-              <button (click)="minusTheory(user.username)" class="btn btn-danger">Theory</button>
-              <button (click)="minusPractise(user.username)" class="btn btn-danger">Practice</button>
+          <tr *ngFor="let user of waitingRoom">
+            <td class="py-2 text-center border">{{ user.username }}</td>
+            <td class="py-2 text-center border">{{ user.email }}</td>
+            <td class="py-2 text-center border">
+              <button (click)="acceptUser(user.id)"
+                class="px-4 py-2 font-bold text-white bg-green-500 rounded hover:bg-green-700">Accept</button>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
+  </div>
+</div>
+
+<div class="container mx-auto mt-4">
+  <div class="py-4">
+    <h2 class="text-2xl font-bold text-center">Students in ORG</h2>
+    <table class="w-full table-auto">
+      <thead>
+        <tr>
+          <th class="py-2">Username</th>
+          <th class="py-2">Count of theory</th>
+          <th class="py-2">Count of driving</th>
+          <th class="py-2">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of usersInOrganization">
+          <td class="py-2 text-center border">{{ user.username }}</td>
+          <td class="py-2 text-center border">{{ user.countOfTheory }}</td>
+          <td class="py-2 text-center border">{{ user.countOfDriving }}</td>
+          <td class="py-2 text-center border">
+            <button (click)="minusTheory(user.username)"
+              class="px-4 py-2 mr-2 font-bold text-white bg-red-500 rounded hover:bg-red-700">Theory</button>
+            <button (click)="minusPractise(user.username)"
+              class="px-4 py-2 mt-4 font-bold text-white bg-red-500 rounded hover:bg-red-700 sm:mt-0">Practice</button>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

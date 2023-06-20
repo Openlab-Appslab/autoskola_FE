@@ -62,7 +62,10 @@ export class OrganizationComponent implements OnInit {
   sendORG() {
     this.organizationService.postImage(this.logoFormData).pipe(
       exhaustMap(() => this.organizationService.saveORG(this.organization))
-    ).subscribe();
+    ).subscribe( () => {
+      alert('Organization created successfully!');
+      window.location.reload();
+    });
     // this.organizationService.postImage(this.logoFormData).subscribe(
     //   () => {
     //     this.organizationService.saveORG(this.organization).subscribe();

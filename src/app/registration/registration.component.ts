@@ -40,8 +40,11 @@ export class RegistrationComponent implements OnInit {
       (data: any) => {
         if (data.status === 'error')
         alert(data.message);
-        else
-        alert(data.message);
+        else{
+          alert(data.message);
+          // route to login
+          window.location.href = 'http://localhost:4200/login';
+        }
       },
     );
   }
@@ -52,8 +55,11 @@ export class RegistrationComponent implements OnInit {
       (data: any) => {
         if (data.status === 'error')
         alert(data.message);
-        else
-        alert(data.message);
+        else{
+          alert(data.message);
+          // route to login
+          window.location.href = 'http://localhost:4200/login';
+        }
       },
     );
   }

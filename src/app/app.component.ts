@@ -42,4 +42,8 @@ export class AppComponent implements OnInit {
     return true;
   }
 
+  removeReceiver() {
+    sessionStorage.removeItem('receiver');
+  }
+
 }

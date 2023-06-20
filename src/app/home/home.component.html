@@ -1,65 +1,23 @@
-<ng-container *ngIf="!waitingRoom && organizations">
-
-  <body>
-    <div id="title" class="slide header">
-      <h1>Driving school</h1>
-    </div>
-    <div id="slide1" class="slide">
-      <h1 class="slidetitle">Offer of driving schools</h1>
-      <div class="container mt-5">
-        <div class="row">
-          <div class="col-md-4" *ngFor="let organization of organizations">
-            <div class="card p-3">
-              <div class="d-flex flex-row mb-3"><img [srcset]="this.organization.image">
-                <h1 class="name">{{organization.name_organization}}</h1>
-              </div>
-              <h6>{{organization.description_organization}}</h6>
-              <div class="d-flex justify-content-between install mt-3"><span>Price
-                  {{organization.price_organization}}€</span>
-                <button *ngIf="isLogged && userRole !== 'INSTRUCTOR'" (click)="addToWaitingRoom(this.organization)" type="button" class="btn btn-primary">Apply</button>
-                <button *ngIf="!isLogged" (click)="goToLogin()" type="button" class="btn btn-primary">Apply</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>
-</ng-container>
-
-<ng-container *ngIf="waitingRoom && waitingRoom[0].userEntity.userEntityMembers === null">
-  <section id="welcome-section">
-    <h1>Hello, {{waitingRoom[0].userEntity.username}}</h1>
-    <p>You are in waiting room for driving school <span
-        class="underline">{{waitingRoom[0].autoskolaOrganization.name_organization}}</span></p>
-    <p>The price for this driving school is <span
-        class="underline">{{waitingRoom[0].autoskolaOrganization.price_organization}}€</span></p>
-    <span class="desc"><span class="underline">Description of driving school:</span>
-      {{waitingRoom[0].autoskolaOrganization.description_organization}}</span>
-    <a><button (click)="cancelWaitingRoom(this.waitingRoom[0].id_waiting)" class="button">Cancel</button></a>
-  </section>
-</ng-container>
-<div *ngIf="!waitingRoom && !organizations">
-  <p class="nothing">There is no organization</p>
-</div>
-
 <ng-container *ngIf="studentInfo && studentInfo.length > 0 && studentInfo[0].userEntity.userEntityMembers !== null">
-  <div id="student-info" class="slide">
-    <h1 class="slidetitle">Your driving and theory status</h1>
-    <div class="container mt-5">
-      <div class="row">
-        <div class="col-md-6 driving text-left">
+  <div class="mt-40">
+    <h1 class="text-xl text-center sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl">Your driving and theory status</h1>
+    <div class="container max-w-xl mx-auto mt-5 duration-1000 animate-in fade-in-0 slide-in-from-bottom-20">
+      <div class="grid w-full grid-cols-1 gap-4 border-2 border-gray-300 rounded-lg shadow-lg sm:w-lg sm:grid-cols-2">
+        <div class="text-center">
           <h2>Driving Count: {{ studentInfo[0].userEntity.countOfDriving }}</h2>
         </div>
-        <div class="col-md-6 theory text-right">
-          <h2 class="text-right">Theory Count: {{ studentInfo[0].userEntity.countOfTheory }}</h2>
+        <div class="text-center">
+          <h2>Theory Count: {{ studentInfo[0].userEntity.countOfTheory }}</h2>
         </div>
       </div>
     </div>
-    <h1 class="slidetitle">Your drivings</h1>
-    <div class="container mt-5">
-      <div class="row">
-        <div class="col-md-4" *ngFor="let driving of studentInfo">
+    
+    <div class="mt-10">
+      <h1 class="text-xl text-center sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl whitespace-nowrap">Your drivings</h1>
+    </div>
+    <div class="container max-w-xl mx-auto mt-5 duration-1000 animate-in fade-in-0 slide-in-from-bottom-20">
+      <div class="grid w-full grid-cols-1 gap-4 border-2 border-gray-300 rounded-lg shadow-lg sm:w-lg sm:grid-cols-2">
+        <div class="p-5" *ngFor="let driving of studentInfo">
           <p>
             <span class="date">Date: {{ driving.reservationDay.reservationDate | date:'dd MMM yyyy' }}</span>
           </p>
@@ -75,26 +33,92 @@
   </div>
 </ng-container>
 
+
+
 <ng-container *ngIf="waitingRoom && waitingRoom[0].userEntity.userEntityMembers !== null && studentInfo.length === 0">
-  <div id="student-info" class="slide">
-    <h1 class="slidetitle">Your driving and theory status</h1>
-    <div class="container mt-5">
-      <div class="row">
-        <div class="col-md-6 driving text-left">
+  <div class="mt-40">
+    <h1 class="text-center">Your driving and theory status</h1>
+    <div class="container max-w-xl mx-auto mt-5 duration-1000 animate-in fade-in-0 slide-in-from-bottom-20">
+      <div class="grid w-full grid-cols-1 gap-4 border-2 border-gray-300 rounded-lg shadow-lg sm:w-lg sm:grid-cols-2">
+        <div class="text-center">
           <h2>Driving Count: {{ waitingRoom[0].userEntity.countOfDriving }}</h2>
         </div>
-        <div class="col-md-6 theory text-right">
-          <h2 class="text-right">Theory Count: {{ waitingRoom[0].userEntity.countOfTheory }}</h2>
+        <div class="text-center">
+          <h2>Theory Count: {{ waitingRoom[0].userEntity.countOfTheory }}</h2>
         </div>
       </div>
     </div>
-<h1 class="slidetitle mt-5">Your drivings</h1>
-<div class="container">
-  <div class="row">
-    <div class="col-md-12 text-center mt-3">
-      <h2 class="driving-state">You do not have any planned driving</h2>
+    <div class="mt-14">
+      <h1 class="text-center">Your drivings</h1>
+      </div>
+    <div class="container max-w-xl mx-auto mt-5 text-center duration-1000 border-2 border-gray-300 rounded-lg shadow-lg animate-in fade-in-0 slide-in-from-bottom-20 sm:w-lg sm:grid-cols-2">
+        <div class="mt-3 text-center">
+          <h2 class="text-center">You do not have any planned driving</h2>
+        </div>
+      </div>
+  </div>
+</ng-container>
+
+
+
+<div *ngIf="!waitingRoom && organizations">
+  <header class="flex items-center justify-center h-screen mb-12 bg-fixed bg-center bg-cover custom-img">
+    <div class="p-5 text-2xl text-white bg-opacity-50">
+      Welcome to driving school
+    </div>
+  </header>
+  <div class="mt-32 mb-32">
+    <h1 class="text-2xl text-center text-blue-600 slidetitle">Offer of driving schools</h1>
+  </div>
+  <div class="container mx-auto">
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <ng-container *ngIf="!waitingRoom && organizations">
+        <div class="mt-20 mb-20 bg-white border-gray-200 rounded-lg shadow light:bg-gray-800 dark:border-gray-700" *ngFor="let organization of organizations">
+          <a href="#" class="flex items-center justify-center" style="height: 200px;">
+            <img class="object-cover h-full rounded-t-lg" [srcset]="organization.image">
+          </a>
+          <div class="p-5">
+            <a href="#">
+              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">{{organization.name_organization}}</h5>
+            </a>
+            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{organization.description_organization}}</p>
+            <span class="inline-flex items-center py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800 mb-5">
+              Price: {{organization.price_organization}}€
+            </span>
+            <br>
+            <a class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" *ngIf="isLogged && userRole !== 'INSTRUCTOR'" (click)="addToWaitingRoom(organization)">
+              Apply
+              <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </a>
+            <a class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" *ngIf="!isLogged" (click)="goToLogin()">
+              Go to Login
+              <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </a>
+          </div>
+        </div>
+      </ng-container>
     </div>
   </div>
 </div>
+
+
+<div class="flex items-center justify-center min-h-screen duration-700 animate-in fade-in zoom-in" *ngIf="waitingRoom && waitingRoom[0].userEntity.userEntityMembers === null">
+  <section id="welcome-section" class="p-8 mx-4 text-center bg-gray-100 border border-gray-300 rounded-md shadow-lg sm:mx-auto sm:max-w-2xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-5xl">
+    <h1 class="mb-10 font-bold">Hello, {{waitingRoom[0].userEntity.username}}</h1>
+    <p class="mb-8 text-2xl">You are in the waiting room for the driving school <span class="underline">{{waitingRoom[0].autoskolaOrganization.name_organization}}</span></p>
+    <p class="mb-8 text-2xl">The price for this driving school is <span class="underline">{{waitingRoom[0].autoskolaOrganization.price_organization}}€</span></p>
+    <span class="block mb-10 text-xl desc"><span class="underline">Description of the driving school:</span> {{waitingRoom[0].autoskolaOrganization.description_organization}}</span>
+    <a>
+      <button (click)="cancelWaitingRoom(this.waitingRoom[0].id_waiting)" class="px-8 py-4 text-xl text-white transition-colors duration-300 transform bg-red-500 rounded hover:bg-red-600 hover:scale-105">
+        Cancel
+      </button>
+    </a>
+  </section>
+</div>
+
+
+<div class="flex items-center h-screen" *ngIf="!waitingRoom && !organizations">
+  <div class="mx-auto">
+    <h1 class="text-center nothing">There is no organization</h1>
   </div>
-</ng-container>
+</div>

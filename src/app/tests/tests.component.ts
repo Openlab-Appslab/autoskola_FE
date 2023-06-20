@@ -151,6 +151,7 @@ export class TestsComponent implements OnInit {
           }
         );
       }
+      alert('Test was successfully created');
       window.location.reload();
     })();
   }

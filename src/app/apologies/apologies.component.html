@@ -1,48 +1,61 @@
-<div *ngIf="this.authority === 'STUDENT'">
-    <mat-card-title>New Apology</mat-card-title>
-    <mat-card-content>
-        <form [formGroup]="apologyForm" (ngSubmit)="onSubmit()">
-        <mat-form-field>
+<div class="flex justify-center mt-7">
+  <div class="flex-col w-full md:w-3/4 lg:w-1/2">
+    <div *ngIf="this.authority === 'STUDENT'">
+      <mat-card-header class="flex justify-center">
+        <mat-card-title>New Apology</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="apologyForm" (ngSubmit)="onSubmit()" class="text-center">
+          <mat-form-field>
             <input matInput [matDatepicker]="picker" placeholder="Date" formControlName="dayOfApology" required>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-        <div *ngIf="apologyForm.controls.dayOfApology.touched && apologyForm.controls.dayOfApology.invalid" class="alert alert-danger">
+          </mat-form-field>
+          <div *ngIf="apologyForm.controls.dayOfApology.touched && apologyForm.controls.dayOfApology.invalid"
+            class="text-red-500">
             <strong>Warning!</strong> Date is required.
-        </div>
-        <br>
-        <mat-form-field class="area">
+          </div>
+          <br>
+          <mat-form-field class="area">
             <textarea matInput placeholder="Apology" formControlName="messageToInstructor" required></textarea>
-        </mat-form-field>
-        <div *ngIf="apologyForm.controls.messageToInstructor.touched && apologyForm.controls.messageToInstructor.invalid" class="alert alert-danger">
+          </mat-form-field>
+          <div
+            *ngIf="apologyForm.controls.messageToInstructor.touched && apologyForm.controls.messageToInstructor.invalid"
+            class="text-red-500">
             <strong>Warning!</strong> Apology is required.
-        </div>
-        <br>
-        <button mat-raised-button color="primary" type="submit" [disabled]="!apologyForm.valid">Send</button>
+          </div>
+          <br>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!apologyForm.valid">Send</button>
         </form>
-    </mat-card-content>
-</div>
-<div *ngIf="this.authority === 'ADMIN' || this.authority === 'INSTRUCTOR'">
-    <mat-card-title>Apologies</mat-card-title>
-    <mat-card-content>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Username</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Apology</th>
-                    <th scope="col">Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let apology of apologies">
-                    <td>{{apology.username}}</td>
-                    <td>{{apology.dayOfApology}}</td>
-                    <td>{{apology.messageToInstructor}}</td>
-                    <td><button mat-raised-button color="warn" (click)="deleteApology(apology.id)">Delete</button></td>
-                </tr>
-            </tbody>
+      </mat-card-content>
+    </div>
+
+    <div *ngIf="this.authority === 'ADMIN' || this.authority === 'INSTRUCTOR'">
+      <div class="mb-16 text-center">
+        <span class="text-6xl font-bold">Apologies</span>
+      </div>
+      <mat-card-content>
+        <table class="w-full border-collapse" *ngIf="apologies.length > 0">
+          <thead>
+            <tr>
+              <th scope="col" class="py-2">Username</th>
+              <th scope="col" class="py-2">Date</th>
+              <th scope="col" class="py-2">Apology</th>
+              <th scope="col" class="py-2">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let apology of apologies" class="border-t">
+              <td class="py-2 text-center">{{apology.username}}</td>
+              <td class="py-2 text-center">{{apology.dayOfApology}}</td>
+              <td class="py-2 text-center">{{apology.messageToInstructor}}</td>
+              <td class="py-2 text-center"><button mat-raised-button color="warn"
+                  (click)="deleteApology(apology.id)">Delete</button></td>
+            </tr>
+          </tbody>
         </table>
-        <p *ngIf="apologies.length == 0">No apologies</p>
-    </mat-card-content>
-</div>
+        <div *ngIf="apologies.length === 0" class="text-center mt-7">
+          <p class="text-5xl mt-7">There are no apologies.</p>
+        </div>
+      </mat-card-content>
+    </div>

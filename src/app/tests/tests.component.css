@@ -54,11 +54,12 @@
       margin: 10% auto;
     }
   } */
-  .question-container {
+  /* .question-container {
     margin-bottom: 10px;
   }
   
-  .question-input, .image-input {
+  .question-input,
+  .image-input {
     display: block;
     margin-bottom: 5px;
   }
@@ -66,13 +67,17 @@
   .add-button {
     margin-top: 10px;
   }
-  a{
+  
+  a {
     text-decoration: none;
   }
+  
   .custom-hover:hover {
     background-color: #f5f5f5;
     cursor: pointer;
   }
-  .test-text-color{
+  
+  .test-text-color {
     color: #0d6efd;
   }
+   */

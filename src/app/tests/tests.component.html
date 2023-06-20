@@ -1,109 +1,99 @@
-<div class="container">
-  <div class="row justify-content-center mt-5">
-    <div class="col-md-6">
-      <div class="d-grid gap-2 mb-3">
-        <button class="btn btn-primary btn-lg" *ngIf="userRole === 'ADMIN' || userRole === 'INSTRUCTOR'" (click)="showMakeTestForm()">Make a test</button>
+<div class="flex justify-center mt-20 mb-20">
+  <button class="px-4 py-2 font-bold text-white bg-blue-600 rounded-md hover:bg-blue-700"
+    *ngIf="userRole === 'ADMIN' || userRole === 'INSTRUCTOR'" (click)="showMakeTestForm()">Make a test</button>
+</div>
+
+<div class="flex justify-center mt-5">
+  <div class="w-full sm:w-10/12 md:w-8/12 lg:w-6/12 xl:w-4/12">
+    <div class="card" *ngIf="showMakeTest">
+      <div class="text-center card-header">
+        <h1 class="card-title">Create a new test</h1>
       </div>
-    </div>
-  </div>
-
-  <div class="row justify-content-center mt-5">
-    <div class="col-md-6">
-      <div class="card" *ngIf="showMakeTest">
-        <div class="card-header text-center">
-          <h4 class="card-title">Create a new test</h4>
+      <form *ngIf="testID == null" class="flex flex-col items-center">
+        <div class="mb-3 text-center">
+          <label for="test-name" class="text-sm font-medium text-gray-700">Test name</label>
+          <input [(ngModel)]="nameOfTest" type="text" id="test-name" placeholder="Enter test name" name="test-name"
+            class="block w-full mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
         </div>
-        <div class="card-body">
-          <form *ngIf="testID == null">
-            <div class="mb-3">
-              <label for="test-name" class="form-label">Test name</label>
-              <input [(ngModel)]="nameOfTest" type="text" class="form-control" id="test-name"
-                placeholder="Enter test name" name="test-name">
-            </div>
-            <button (click)="saveTestName()" type="submit" class="btn btn-primary">Save Test</button>
-          </form>
-
-          <form [formGroup]="dynamicForm" *ngIf="testID != null">
-            <div formArrayName="fields">
-              <div *ngFor="let field of getFormArrayControls(); let i = index">
-                <div class="mb-3">
-                  <label for="question{{i}}" class="form-label">Question {{i + 1}}</label>
-                  <input type="text" [formControlName]="i" class="form-control" id="question{{i}}"
-                    placeholder="Enter question" (input)="updateQuestion(i, $any($event.target).value)" />
-                </div>
-                <div class="mb-3">
-                  <label for="answer1{{i}}" class="form-label">Answer 1</label>
-                  <input type="text" [id]="'answer1' + i" class="form-control" placeholder="Enter answer"
-                    (input)="updateAnswer(i, $any($event.target).value, 'answer1')" />
-                  <div class="form-check">
-                    <input type="checkbox" [id]="'correctAnswer1' + i" [value]="'correctAnswer1'"
-                      class="form-check-input" (click)="updateCorrectAnswer(i, $any($event.target).value)" />
-                    <label class="form-check-label" for="'correctAnswer1' + i">Correct answer</label>
-                  </div>
-                </div>
-                <div class="mb-3">
-                  <label for="answer2{{i}}" class="form-label">Answer 2</label>
-                  <input type="text" [id]="'answer2' + i" class="form-control" placeholder="Enter answer"
-                    (input)="updateAnswer(i, $any($event.target).value, 'answer2')" />
-                  <div class="form-check">
-                    <input type="checkbox" [id]="'correctAnswer2' + i" [value]="'correctAnswer2'"
-                      class="form-check-input" (click)="updateCorrectAnswer(i, $any($event.target).value)" />
-                    <label class="form-check-label" for="'correctAnswer2' + i">Correct answer</label>
-                  </div>
-                </div>
-                <div class="mb-3">
-                  <label for="answer3{{i}}" class="form-label">Answer 3</label>
-                  <input type="text" [id]="'answer3' + i" class="form-control" placeholder="Enter answer"
-                    (input)="updateAnswer(i, $any($event.target).value, 'answer3')" />
-                  <div class="form-check">
-                    <input type="checkbox" [id]="'correctAnswer3' + i" [value]="'correctAnswer3'"
-                      class="form-check-input" (click)="updateCorrectAnswer(i, $any($event.target).value)" />
-                    <label class="form-check-label" for="'correctAnswer3' + i">Correct answer</label>
-                  </div>
-                </div>
-                <div class="mb-3 text-center">
-                  <label for="image{{i}}" class="form-label">Image of question</label>
-                  <br>
-                  <img *ngIf="questionAndImage[i]?.containImage" [srcset]="questionAndImage[i]?.imageToShow" class="img-fluid" alt="Question image">
-                  <input type="file" id="imageInput{{i}}" class="form-control" (change)="onFileSelected($event, i)" />
-                  <br>
-                  <button *ngIf="questionAndImage[i]?.containImage" class="btn btn-danger mt-2" (click)="removeImage(i)">Remove Image</button>
-                </div>                
-                <div class="text-center">
-                  <button type="button" class="btn btn-danger" (click)="removeField(i)">Remove question</button>
-                </div>
-                <hr />
-
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <button type="button" class="btn btn-primary" (click)="addField()">Add new question</button>
-              </div>
-              <div class="col-md-6 text-end">
-                <button type="button" class="btn btn-success" (click)="saveQuestionAndImage()">Save Questions and
-                  Images</button>
-              </div>
-            </div>
-          </form>
+        <div>
+          <button (click)="saveTestName()" type="submit"
+            class="px-4 py-2 font-bold text-white bg-blue-600 rounded-md hover:bg-blue-700">Save test name</button>
         </div>
-      </div>
+      </form>
 
-      <div class="card" *ngIf="showListOfTests">
-        <div class="card-header">
-          <h4 class="card-title">List of Tests</h4>
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-6" *ngFor="let test of allTests">
-              <div class="card mb-3 custom-hover" (click)="goToTest(test.id)">
-                <div class="card-body text-center">
-                  <a class="test-text-color">{{ test.nameOfTest}}</a>
+      <div class="container px-4 mx-auto" *ngIf="testID != null">
+        <div class="py-8">
+          <div class="max-w-3xl mx-auto">
+      
+            <form [formGroup]="dynamicForm" class="flex flex-col items-center p-6 border border-gray-300 rounded-md shadow-lg">
+              <div class="form-array" formArrayName="fields">
+                <div *ngFor="let field of getFormArrayControls(); let i = index">
+                  <div class="mb-3">
+                    <label for="question{{i}}" class="block text-sm font-medium text-gray-700">Question {{i + 1}}</label>
+                    <input type="text" [formControlName]="i" class="block w-full mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" id="question{{i}}" placeholder="Enter question" (input)="updateQuestion(i, $any($event.target).value)" />
+                  </div>
+                  <div class="mb-3">
+                    <label for="answer1{{i}}" class="block text-sm font-medium text-gray-700">Answer 1</label>
+                    <input type="text" [id]="'answer1' + i" class="block w-full mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Enter answer 1" (input)="updateAnswer(i, $any($event.target).value, 'answer1')" />
+                    <div class="flex items-center mt-2">
+                      <input type="checkbox" [id]="'correctAnswer1' + i" [value]="'correctAnswer1'" class="" (click)="updateCorrectAnswer(i, $any($event.target).value)" />
+                      <label class="ml-2 text-sm text-gray-700" for="'correctAnswer1' + i">Correct answer</label>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="answer2{{i}}" class="block text-sm font-medium text-gray-700">Answer 2</label>
+                    <input type="text" [id]="'answer2' + i" class="block w-full mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Enter answer 2" (input)="updateAnswer(i, $any($event.target).value, 'answer2')" />
+                    <div class="flex items-center mt-2">
+                      <input type="checkbox" [id]="'correctAnswer2' + i" [value]="'correctAnswer2'" class="form-checkbox" (click)="updateCorrectAnswer(i, $any($event.target).value)" />
+                      <label class="ml-2 text-sm text-gray-700" for="'correctAnswer2' + i">Correct answer</label>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="answer3{{i}}" class="block text-sm font-medium text-gray-700">Answer 3</label>
+                    <input type="text" [id]="'answer3' + i" class="block w-full mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Enter answer 3" (input)="updateAnswer(i, $any($event.target).value, 'answer3')" />
+                    <div class="flex items-center mt-2">
+                      <input type="checkbox" [id]="'correctAnswer3' + i" [value]="'correctAnswer3'" class="form-checkbox" (click)="updateCorrectAnswer(i, $any($event.target).value)" />
+                      <label class="ml-2 text-sm text-gray-700" for="'correctAnswer3' + i">Correct answer</label>
+                    </div>
+                  </div>
+                  <div class="mb-3 text-center">
+                    <label for="image{{i}}" class="block text-sm font-medium text-gray-700">Image of question</label>
+                    <br>
+                    <img *ngIf="questionAndImage[i]?.containImage" [srcset]="questionAndImage[i]?.imageToShow" class="h-32 mx-auto" alt="Question image">
+                    <input type="file" id="imageInput{{i}}" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-600 hover:file:bg-blue-100" (change)="onFileSelected($event, i)">
+                    <br>
+                    <button *ngIf="questionAndImage[i]?.containImage" class="px-4 py-2 mt-2 text-white bg-red-600 rounded-md hover:bg-red-700" (click)="removeImage(i)">Remove Image</button>
+                  </div>
+                  <div class="text-center">
+                    <button type="button" class="px-4 py-2 text-white bg-red-600 rounded-md hover:bg-red-700" (click)="removeField(i)">Remove question</button>
+                  </div>
+                  <hr class="mt-5 mb-5" />
                 </div>
               </div>
-            </div>
+              <div class="flex flex-col justify-between mt-4 space-y-4 sm:flex-row sm:space-y-0 sm:space-x-5">
+                <button type="button" class="w-full px-4 py-2 text-white bg-blue-600 rounded-md sm:w-auto hover:bg-blue-700" (click)="addField()">Add new question</button>
+                <button type="button" class="w-full px-4 py-2 text-white bg-green-600 rounded-md sm:w-auto hover:bg-green-700" (click)="saveQuestionAndImage()">Save Questions and Images</button>
+              </div>
+            </form>
+      
           </div>
         </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showListOfTests">
+  <div class="text-center">
+    <h4>List of Tests</h4>
+  </div>
+  <div *ngFor="let test of allTests">
+    <div
+      class="w-1/12 mx-auto mb-3 overflow-hidden bg-white border shadow-sm rounded-xl md:max-w-sm hover:cursor-pointer"
+      (click)="goToTest(test.id)">
+      <div class="text-center card-body">
+        <a class="text-blue-600">{{ test.nameOfTest}}</a>
       </div>
     </div>
   </div>

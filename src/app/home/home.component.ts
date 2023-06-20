@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
     this.organizationService.getInfoForStudent().subscribe(
       (data: any) => {
         this.studentInfo = data;
-        console.log(this.studentInfo);
+        //console.log(this.studentInfo);
       });
     this.organizationService.allORG().subscribe(data => {
       if (data.length > 0) {
