@@ -29,6 +29,13 @@ export class OrganizationService {
   private deleteApologyUrl = 'http://localhost:8080/deleteApology';
   private reservationDoneUrl = 'http://localhost:8080/reservationDone';
   private getInfoForStudentUrl = 'http://localhost:8080/getInfoForStudent';
+  private showAllInstructorsUrl = 'http://localhost:8080/api/showAllInstructors';
+  private instructorRequestUrl = 'http://localhost:8080/instructorRequest';
+
+  private acceptedForInstructorUrl = 'http://localhost:8080/acceptedForInstructor';
+  private instructorRequestGetUrl = 'http://localhost:8080/instructorRequest';
+
+  private organizationForChooseUrl = 'http://localhost:8080/api/organizationForChoose';
 
   saveORG(organization: Organization) {
     return this.http.post<Organization>(this.saveORGUrl, organization);
@@ -100,5 +107,25 @@ export class OrganizationService {
 
   getInfoForStudent() {
     return this.http.get(this.getInfoForStudentUrl);
+  }
+
+  showAllInstructors() {
+    return this.http.get(this.showAllInstructorsUrl);
+  }
+
+  instructorRequest(instructor: any) {
+    return this.http.post(this.instructorRequestUrl, {"id": instructor.instructor.id});
+  }
+
+  acceptedForInstructor() {
+    return this.http.get(this.acceptedForInstructorUrl);
+  }
+
+  instructorRequestGet() {
+    return this.http.get(this.instructorRequestGetUrl);
+  }
+
+  organizationForChoose() {
+    return this.http.get(this.organizationForChooseUrl);
   }
 }

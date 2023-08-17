@@ -7,4 +7,7 @@ export class User {
     confirmPassword?: string;
     countOfTheory?: string;
     countOfPractice?: string;
+    userEntityInstructors?: {
+        id_organization?: number;
+    }
 }

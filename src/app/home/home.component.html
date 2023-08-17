@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="mt-10">
       <h1 class="text-xl text-center sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl whitespace-nowrap">Your drivings</h1>
     </div>
@@ -67,7 +67,7 @@
 
 
 
-<div *ngIf="!waitingRoom && organizations">
+<div *ngIf="!waitingRoom && organizations && userRole != 'MAIN_INSTRUCTOR'">
   <header class="flex items-center justify-center h-screen mb-12 bg-fixed bg-center bg-cover custom-img">
     <div class="p-5 text-2xl text-white bg-opacity-50">
       Welcome to driving school
@@ -121,6 +121,40 @@
     </a>
   </section>
 </div>
+
+<div *ngIf="userRole === 'MAIN_INSTRUCTOR'" class="mx-4 my-8">
+  <div class="mt-10 mb-32">
+    <h1 class="text-2xl text-center text-blue-600 slidetitle">Instructors waiting for approval</h1>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div *ngFor="let instructor of allInstructorsRequest" class="bg-white rounded-lg shadow-lg">
+      <div class="p-6">
+        <p class="text-lg font-semibold">{{ instructor.instructor.username }}</p>
+        <p class="text-gray-500">{{ instructor.instructor.email }}</p>
+      </div>
+      <div class="px-6 pb-6">
+        <button class="block w-full bg-blue-500 text-white py-2 rounded-md transition duration-300 hover:bg-blue-600" (click)="acceptInstructor(instructor)">
+          Accept instructor
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+<!--  make a list of accepted instructors-->
+  <div class="mt-10 mb-32">
+    <h1 class="text-2xl text-center text-blue-600 slidetitle">Accepted instructors</h1>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div *ngFor="let instructor of allInstructors" class="bg-white rounded-lg shadow-lg">
+      <div class="p-6">
+        <p class="text-lg font-semibold">{{ instructor.username }}</p>
+        <p class="text-gray-500">{{ instructor.email }}</p>
+      </div>
+    </div>
+  </div>
+
+
 
 
 <div class="flex items-center h-screen" *ngIf="!waitingRoom && !organizations">

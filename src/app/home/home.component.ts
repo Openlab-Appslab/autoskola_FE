@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Organization } from '../organization';
 import { OrganizationService } from '../services/organization.service';
 import { AuthService } from '../services/auth.service';
+import {data} from "autoprefixer";
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,8 @@ export class HomeComponent implements OnInit {
   studentInfo: any[] = [];
   isLogged: boolean;
   userRole: string;
+  allInstructors: any[] = [];
+  allInstructorsRequest: any[] = [];
 
   constructor(private organizationService: OrganizationService, private authService: AuthService) { }
 
@@ -53,6 +56,18 @@ export class HomeComponent implements OnInit {
         this.userRole = data.authority;
       }
     );
+
+    this.organizationService.showAllInstructors().subscribe(
+      (data: any) => {
+        this.allInstructors = data;
+      }
+    );
+
+    this.organizationService.instructorRequestGet().subscribe(
+      (data: any) => {
+        this.allInstructorsRequest = data;
+      }
+    );
   }
   logout() {
     sessionStorage.removeItem('token');
@@ -73,5 +88,20 @@ export class HomeComponent implements OnInit {
 
   goToLogin() {
     window.location.href = '/login';
+  }
+
+  getAllInstructors() {
+    this.organizationService.showAllInstructors().subscribe(
+      (data: any) => {
+        this.allInstructors = data;
+      }
+    );
+  }
+
+  acceptInstructor(instructor: any) {
+    this.organizationService.instructorRequest(instructor).subscribe(() => {
+      this.getAllInstructors();
+        this.allInstructorsRequest = this.allInstructorsRequest.filter(item => item.id !== instructor.id);
+    });
   }
 }

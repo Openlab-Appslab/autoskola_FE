@@ -99,6 +99,7 @@
                               <select class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" [(ngModel)]="user.authority">
                                 <option value="STUDENT">Student</option>
                                 <option value="INSTRUCTOR">Instructor</option>
+                                <option value="MAIN_INSTRUCTOR">Main Instructor</option>
                                 <option value="ADMIN">Admin</option>
                               </select>
                           </div>
@@ -113,7 +114,30 @@
                           </div>
                       </div>
                   </div>
-                  <div class="text-center mt-4 mb-7">
+
+<!--   make a dropdown list using tailwind css that will show every name_organization from variable allOrganizations -->
+                <div *ngIf="user.authority == 'INSTRUCTOR'" class="flex -mx-3">
+                  <div class="w-full px-3 mb-7">
+                    <label class="text-xs font-semibold px-1">Organization</label>
+                    <div class="flex">
+                      <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                        <i class="mdi mdi-account-outline text-gray-400 text-lg"></i>
+                      </div>
+                      <select
+                        class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                        [(ngModel)]="selectedOrganization"
+                      >
+                        <option *ngFor="let organization of allOrganizations" [value]="organization.id_organization">
+                          {{ organization.name_organization }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <div class="text-center mt-4 mb-7">
                       <a href="/login" class="text-blue-500 hover:text-blue-700">If you already have an account click here</a>
                   </div>
                   <div class="flex -mx-3">
